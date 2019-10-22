@@ -41,7 +41,7 @@ with torch.cuda.device(0):
 
     print("===== Training Models Done =====")
 
-    print("===== Drawing a plot =====")
+    print("===== Drawing ROC Plot =====")
 
     now = datetime.datetime.now()
     date = now.strftime('%Y-%m-%d')
@@ -75,4 +75,5 @@ with torch.cuda.device(0):
     plt.legend(loc='lower right')
     plt.savefig(f'{date}_roc_score.png')
 
-    plt.show()
+    print("===== Drawing Accuracy Plot =====")
+

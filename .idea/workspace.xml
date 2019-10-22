@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a1b92fdf-e27a-4fea-9f27-537dbf02ca67" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/FM.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/FM.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/ONN_NFM.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/ONN_NFM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/SGD_NFM.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/SGD_NFM.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -137,7 +139,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1571711134858</updated>
-      <workItem from="1571711146506" duration="9855000" />
+      <workItem from="1571711146506" duration="12652000" />
     </task>
     <task id="LOCAL-00001" summary="Add configurations">
       <created>1571712568440</created>
@@ -167,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571722215920</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fix errors">
+      <created>1571725646965</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1571725646965</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

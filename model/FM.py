@@ -113,16 +113,26 @@ class FM(torch.nn.Module):
 
         return pred.data.numpy() > 0.5
 
+    def accuracy_score(self, pred, train_Y):
+        accuracy = 0
+
+        for i in range(pred.shape[0]):
+            if pred[i] == train_Y[i]:
+                accuracy += 1
+
+        return accuracy / len(train_Y) * 100
+
     def roc_score(self, pred, train_Y):
         confusion_matrix = {"tp": 0, "fp": 0, "tn": 0, "fn": 0}
-        for j in range(pred.shape[0]):
-            if pred[j] == train_Y[j]:
-                if train_Y[j] == 1:
+
+        for i in range(pred.shape[0]):
+            if pred[i] == train_Y[i]:
+                if train_Y[i] == 1:
                     confusion_matrix["tp"] += 1
                 else:
                     confusion_matrix["tn"] += 1
             else:
-                if train_Y[j] == 1:
+                if train_Y[i] == 1:
                     confusion_matrix["fn"] += 1
                 else:
                     confusion_matrix["fp"] += 1
@@ -142,6 +152,7 @@ class FM(torch.nn.Module):
     def evaluate(self, train_Xi, train_Xv, train_Y):
         train_size = len(train_Y)
         time_elapsed = 0
+        accuracy = []
         roc = []
 
         start = time()
@@ -156,7 +167,8 @@ class FM(torch.nn.Module):
             pred = self.predict(train_Xi, train_Xv)
 
             if i % 1000 == 0:
+                accuracy.append(self.accuracy_score(pred, train_Y))
                 roc.append(self.roc_score(pred, train_Y))
 
         time_elapsed = time() - start
-        return time_elapsed, roc
+        return time_elapsed, accuracy, roc

@@ -144,17 +144,26 @@ class SGD_NFM(torch.nn.Module):
         pred = torch.sigmoid(output).cpu()
         return pred.data.numpy() > 0.5
 
-    def roc_score(pred, train_Y):
+    def accuracy_score(self, pred, train_Y):
+        accuracy = 0
+
+        for i in range(len(pred)):
+            if pred[i] == train_Y[i]:
+                accuracy += 1
+
+        return accuracy / len(train_Y) * 100
+
+    def roc_score(self, pred, train_Y):
         confusion_matrix = {"tp": 0, "fp": 0, "tn": 0, "fn": 0}
 
-        for j in range(pred):
-            if pred[j] == train_Y[j]:
-                if train_Y[j] == 1:
+        for i in range(len(pred)):
+            if pred[i] == train_Y[i]:
+                if train_Y[i] == 1:
                     confusion_matrix["tp"] += 1
                 else:
                     confusion_matrix["tn"] += 1
             else:
-                if train_Y[j] == 1:
+                if train_Y[i] == 1:
                     confusion_matrix["fn"] += 1
                 else:
                     confusion_matrix["fp"] += 1
@@ -164,39 +173,14 @@ class SGD_NFM(torch.nn.Module):
 
         return {"tpr": tpr, "fpr": fpr}
 
-    def roc_score(self, pred, train_Y):
-        confusion_matrix = {"tp": 0, "fp": 0, "tn": 0, "fn": 0}
-
-        for j in range(pred.shape[0]):
-            if pred[j] == train_Y[j]:
-                if train_Y[j] == 1:
-                    confusion_matrix["tp"] += 1
-                else:
-                    confusion_matrix["tn"] += 1
-            else:
-                if train_Y[j] == 1:
-                    confusion_matrix["fn"] += 1
-                else:
-                    confusion_matrix["fp"] += 1
-
-        if confusion_matrix['tp'] + confusion_matrix['fp'] != 0:
-            tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fp'])
-        else:
-            tpr = 0
-
-        if confusion_matrix['fp'] + confusion_matrix['tn'] != 0:
-            fpr = confusion_matrix['fp'] / (confusion_matrix['fp'] + confusion_matrix['tn'])
-        else:
-            fpr = 0
-
-        return {"tpr": tpr, "fpr": fpr}
-
     def evaluate(self, train_Xi, train_Xv, train_Y):
         train_size = len(train_Y)
+
         time_elapsed = 0
         confusion_matrix = {
             "tp": 0, "fp": 0, "tn": 0, "fn": 0
         }
+        accuracy = []
         roc = []
 
         start = time()
@@ -210,8 +194,8 @@ class SGD_NFM(torch.nn.Module):
             pred = self.predict(train_Xi, train_Xv)
 
             if i % 1000 == 0:
+                accuracy.append(self.accuracy_score(pred, train_Y))
                 roc.append(self.roc_score(pred, train_Y))
 
-
         time_elapsed = time() - start
-        return time_elapsed, roc
+        return time_elapsed, accuracy, roc

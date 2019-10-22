@@ -213,22 +213,20 @@ class ONN_NFM(torch.nn.Module):
         pred = self.predict_(Xi_data, Xv_data)
         return pred
 
-    def evaluate(self, train_Xi, train_Xv, train_Y):
+    def accuracy_score(self, pred, train_Y):
+        accuracy = 0
+
+        for i in range(len(pred)):
+            if pred[i] == train_Y[i]:
+                accuracy += 1
+
+        return accuracy / len(train_Y) * 100
+
+    def roc_score(self, pred, train_Y):
         confusion_matrix = {"tp": 0, "fp": 0, "tn": 0, "fn": 0}
-        roc = []
-        time_elapsed = 0
-        pos = 0
-        neg = 0
 
-        start = time()
-        for i in range(len(train_Y)):
-            pred = self.predict(np.array(train_Xi[i]), np.array(train_Xv[i]))
-            if (pred == 1):
-                pos += 1
-            else:
-                neg += 1
-
-            if pred == train_Y[i]:
+        for i in range(len(pred)):
+            if pred[i] == train_Y[i]:
                 if train_Y[i] == 1:
                     confusion_matrix["tp"] += 1
                 else:
@@ -239,29 +237,24 @@ class ONN_NFM(torch.nn.Module):
                 else:
                     confusion_matrix["fp"] += 1
 
+        tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fp'])
+        fpr = confusion_matrix['fp'] / (confusion_matrix['fp'] + confusion_matrix['tn'])
+
+        return {"tpr": tpr, "fpr": fpr}
+
+    def evaluate(self, train_Xi, train_Xv, train_Y):
+        accuracy = []
+        roc = []
+        time_elapsed = 0
+
+        start = time()
+        for i in range(len(train_Y)):
+            pred = self.predict(np.array(train_Xi[i]), np.array(train_Xv[i]))
             self.partial_fit(np.array(train_Xi[i]), np.array(train_Xv[i]), np.array(train_Y[i]))
 
             if i % 1000 == 0:
-                if confusion_matrix['tp'] + confusion_matrix['fp'] != 0:
-                    tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fp'])
-                else:
-                    tpr = 0
-                if confusion_matrix['fp'] + confusion_matrix['tn'] != 0:
-                    fpr = confusion_matrix['fp'] / (confusion_matrix['fp'] + confusion_matrix['tn'])
-                else:
-                    fpr = 0
-                roc.append({'tpr': tpr, 'fpr': fpr})
+                accuracy.append(self.accuracy_score(pred, train_Y))
+                roc.append(self.roc_score(pred, train_Y))
 
         time_elapsed = time() - start
-        return time_elapsed, roc
-
-
-
-# train_Xi = [0, 1, 2, 3, 0, 0, 0, 7, 21, 2, 0, 2, 3, 3, 25, 21, 29, 3, 0, 26, 1, 0, 22, 25, 22, 25, 2, 31, 25, 6, 29, 1, 2, 25, 0, 1, 27, 1, 2]
-# train_Xv = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-# train_Y = 0
-#
-# onn_nfm = ONN_NFM(39, [63, 113, 126, 51, 224, 148, 100, 79, 104, 9, 32, 57, 82, 1457, 555, 176373, 129683, 305, 19, 11887, 632, 3, 41738, 5170, 175446, 3170, 27, 11356, 165602, 10, 4641, 2030, 4, 172761, 18, 15, 57903, 86, 44549], max_num_hidden_layers=5, qtd_neuron_per_hidden_layer=10,
-#                       verbose=True, use_cuda=True, interaction_type=True)
-#
-# print(onn_nfm.predict(train_Xi, train_Xv))
+        return time_elapsed, accuracy, roc
