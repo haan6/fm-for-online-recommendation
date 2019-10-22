@@ -38,3 +38,36 @@ def read_criteo_data(file_path, emb_file):
     result['size'] += len(result['value'])
 
     return result
+
+def balance_creteo_data(file_path, emb_file):
+    result = read_criteo_data(file_path, emb_file)
+
+    indices = {'0': [], '1': []}
+
+    for i in range(len(result['label'])):
+        if result['label'][i] == 0:
+            indices['0'].append(i)
+        else:
+            indices['1'].append(i)
+
+    random.shuffle(indices['0'])
+    indices['0'] = indices['0'][:len(indices['1'])]
+
+    indices['0'].extend(indices['1'])
+    random.shuffle(indices['0'])
+    balanced_index = indices['0']
+
+    balanced_Xi = []
+    balanced_Xv = []
+    balanced_Y = []
+
+    for i in balanced_index:
+        balanced_Xi.append(train_Xi[i])
+        balanced_Xv.append(train_Xv[i])
+        balanced_Y.append(train_Y[i])
+
+    result['index'] = balanced_Xi
+    reuslt['value'] = balanced_Xv
+    result['label'] = balanced_Y
+
+    return results
