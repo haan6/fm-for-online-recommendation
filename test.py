@@ -13,9 +13,9 @@ train_dict = data_preprocess.balance_criteo_data('data/tiny_train_input.csv', 'd
 train_dict_size = train_dict['size']
 
 train_Xi, train_Xv, train_Y \
-    = train_dict['index'][:int(train_dict_size * 0.05)], \
-      train_dict['value'][:int(train_dict_size * 0.05)], \
-      train_dict['label'][:int(train_dict_size * 0.05)]
+    = train_dict['index'][:int(train_dict_size * 0.25)], \
+      train_dict['value'][:int(train_dict_size * 0.25)], \
+      train_dict['label'][:int(train_dict_size * 0.25)]
 
 print("===== Dataset is Ready =====")
 
@@ -36,8 +36,7 @@ with torch.cuda.device(0):
 
     for i, model in enumerate(models):
         print(f"===== Training {models[i][1]} =====")
-        time_elapsed[models[i][1]], roc_scores[models[i][1]] = models[0].evaluate(train_Xi, train_Xv, train_Y)
-        print(time_elapsed[models[i][1]], roc_scores[models[i][1]])
+        time_elapsed[models[i][1]], roc_scores[models[i][1]] = models[i][0].evaluate(train_Xi, train_Xv, train_Y)
         print(f"===== Evaluating {models[i][1]} is Finished. Time: {time_elapsed[models[i][1]]} =====")
     #
 

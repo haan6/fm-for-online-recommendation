@@ -27,7 +27,7 @@ class FM(torch.nn.Module):
 
         # Check CUDA
         if torch.cuda.is_available() and use_cuda:
-            print("Using CUDA")
+            print("FM: Using CUDA")
 
         self.device = torch.device("cuda:0" if torch.cuda.is_available() and use_cuda else "cpu")
 
