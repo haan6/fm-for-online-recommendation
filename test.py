@@ -17,7 +17,7 @@ train_Xi, train_Xv, train_Y \
       train_dict['value'][:int(train_dict_size * 0.25)], \
       train_dict['label'][:int(train_dict_size * 0.25)]
 
-print("===== Dataset is Ready =====")
+print("===== Dataset Ready =====")
 
 with torch.cuda.device(0):
     time_elapsed = {"FM": 0, "SGD_NFM": 0, "ONN_NFM": 0}
@@ -32,13 +32,14 @@ with torch.cuda.device(0):
 
     models = [(fm, "FM"), (sgd_nfm, "SGD_NFM"), (onn_nfm, "ONN_NFM")]
 
-    print("===== Models are Ready =====")
+    print("===== Models Ready =====")
 
     for i, model in enumerate(models):
         print(f"===== Training {models[i][1]} =====")
         time_elapsed[models[i][1]], roc_scores[models[i][1]] = models[i][0].evaluate(train_Xi, train_Xv, train_Y)
-        print(f"===== Evaluating {models[i][1]} is Finished. Time: {time_elapsed[models[i][1]]} =====")
-    #
+        print(f"Evaluating {models[i][1]} Done. Time Elapsed: {time_elapsed[models[i][1]]}s")
+
+    print("===== Training Models Done =====")
 
     print("===== Drawing a plot =====")
 
