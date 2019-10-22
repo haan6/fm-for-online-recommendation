@@ -3,13 +3,7 @@
   <component name="RemoteMappingsManager">
     <list>
       <list>
-        <remote-mappings server-id="python@sftp://yeji@143.248.92.108:2000/home/yeji/Myenv/bin/python3.6">
-          <settings>
-            <list>
-              <mapping local-root="$PROJECT_DIR$" remote-root="/home/yeji/Myenv/research" />
-            </list>
-          </settings>
-        </remote-mappings>
+        <remote-mappings server-id="python@sftp://yeji@143.248.92.108:2000/home/yeji/Myenv/bin/python3.6" />
       </list>
     </list>
   </component>

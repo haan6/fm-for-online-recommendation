@@ -6,6 +6,8 @@
 This script is used to preprocess the raw data file
 """
 
+import random
+
 def load_criteo_category_index(file_path):
     f = open(file_path, 'r')
     cate_dict = []
@@ -39,7 +41,7 @@ def read_criteo_data(file_path, emb_file):
 
     return result
 
-def balance_creteo_data(file_path, emb_file):
+def balance_criteo_data(file_path, emb_file):
     result = read_criteo_data(file_path, emb_file)
 
     indices = {'0': [], '1': []}
