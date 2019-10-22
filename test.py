@@ -37,7 +37,7 @@ with torch.cuda.device(0):
     for i, model in enumerate(models):
         print(f"===== Training {models[i][1]} =====")
         time_elapsed[models[i][1]], roc_scores[models[i][1]] = models[i][0].evaluate(train_Xi, train_Xv, train_Y)
-        print(f"Evaluating {models[i][1]} Done. Time Elapsed: {int(time_elapsed[models[i][1]] / 60)}m {time_elapsed[models[i][1]]-int(time_elapsed[models[i][1]] / 60)}s")
+        print(f"Evaluating {models[i][1]} Done. Time Elapsed: {int(time_elapsed[models[i][1]] / 60)}m {time_elapsed[models[i][1]] - 60 * int(time_elapsed[models[i][1]] / 60)}s")
 
     print("===== Training Models Done =====")
 
@@ -60,16 +60,16 @@ with torch.cuda.device(0):
         tpr = []
         fpr = []
 
-        for j in range(roc_scores[models[i][1]]):
+        for j in range(len(roc_scores[models[i][1]])):
             tpr.append([roc_scores[models[i][1]][j]["tpr"]])
             fpr.append([roc_scores[models[i][1]][j]["fpr"]])
 
-            plt.plot(fpr, tpr, color=color,
-                    marker=mark,
-                    markerfacecolor='None',
-                    markeredgecolor=color,
-                    linestyle='None',
-                    label=models[i][0])
+        plt.plot(fpr, tpr, color=color,
+                marker=mark,
+                markerfacecolor='None',
+                markeredgecolor=color,
+                linestyle='None',
+                label=models[i][0])
 
     plt.title('ROC Score')
     plt.legend(loc='lower right')

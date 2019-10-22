@@ -241,15 +241,6 @@ class ONN_NFM(torch.nn.Module):
 
             self.partial_fit(np.array(train_Xi[i]), np.array(train_Xv[i]), np.array(train_Y[i]))
 
-            print("pos", pos)
-            print("neg", neg)
-            #print(confusion_matrix)
-            #print(confusion_matrix['tp'])
-            tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fp']  + 1e-16)
-            fpr = confusion_matrix['fp'] / (confusion_matrix['fp'] + confusion_matrix['tn'] + 1e-16)
-
-            print('tpr : %.3f  ,  fpr : %.3f' %(tpr,fpr))
-
             if i % 1000 == 0:
                 if confusion_matrix['tp'] + confusion_matrix['fp'] != 0:
                     tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fp'])
