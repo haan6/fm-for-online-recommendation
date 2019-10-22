@@ -64,12 +64,12 @@ def balance_criteo_data(file_path, emb_file):
     balanced_Y = []
 
     for i in balanced_index:
-        balanced_Xi.append(train_Xi[i])
-        balanced_Xv.append(train_Xv[i])
-        balanced_Y.append(train_Y[i])
+        balanced_Xi.append(result['index'][i])
+        balanced_Xv.append(result['value'][i])
+        balanced_Y.append(result['label'][i])
 
     result['index'] = balanced_Xi
-    reuslt['value'] = balanced_Xv
+    result['value'] = balanced_Xv
     result['label'] = balanced_Y
 
-    return results
+    return result

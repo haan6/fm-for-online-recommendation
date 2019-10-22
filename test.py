@@ -2,11 +2,9 @@ import torch
 from model.FM import *
 from model.SGD_NFM import *
 from model.ONN_NFM import *
+from data import data_preprocess
 
 import datetime
-
-from utils import data_preprocess
-
 import matplotlib.pyplot as plt
 
 print("===== Importing Dataset =====")

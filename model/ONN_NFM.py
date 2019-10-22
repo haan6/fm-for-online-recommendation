@@ -202,8 +202,8 @@ class ONN_NFM(torch.nn.Module):
     def predict_(self, Xi_data, Xv_data):
         idx = self.alpha.argmax()
         #print(self.alpha)
-        print(self.forward(Xi_data, Xv_data)[idx,:,:])
-        print(self.forward(Xi_data, Xv_data)[idx,:,:].argmax())
+        # print(self.forward(Xi_data, Xv_data)[idx,:,:])
+        # print(self.forward(Xi_data, Xv_data)[idx,:,:].argmax())
 
 
         #return ((self.alpha.reshape([-1, 1, 1])).mul(self.forward(Xi_data, Xv_data)).sum(dim=0).argmax(dim=1).squeeze()).cpu().numpy()
