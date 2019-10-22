@@ -72,4 +72,6 @@ def balance_criteo_data(file_path, emb_file):
     result['value'] = balanced_Xv
     result['label'] = balanced_Y
 
+    result['size'] = len(result['value'])
+
     return result

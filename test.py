@@ -10,14 +10,14 @@ import matplotlib.pyplot as plt
 print("===== Importing Dataset =====")
 
 train_dict = data_preprocess.balance_criteo_data('data/tiny_train_input.csv', 'data/category_emb.csv')
-train_dict_size = train_dict['size']
+train_dict_size = train_dict['size'] * 0.1
 
 train_Xi, train_Xv, train_Y \
-    = train_dict['index'][:int(train_dict_size * 0.25)], \
-      train_dict['value'][:int(train_dict_size * 0.25)], \
-      train_dict['label'][:int(train_dict_size * 0.25)]
+    = train_dict['index'][:int(train_dict_size)], \
+      train_dict['value'][:int(train_dict_size)], \
+      train_dict['label'][:int(train_dict_size)]
 
-print("===== Dataset Ready =====")
+print(f"===== Dataset Ready -- # of Data: {int(train_dict_size)} -- =====")
 
 with torch.cuda.device(0):
     time_elapsed = {"FM": 0, "SGD_NFM": 0, "ONN_NFM": 0}
@@ -37,7 +37,7 @@ with torch.cuda.device(0):
     for i, model in enumerate(models):
         print(f"===== Training {models[i][1]} =====")
         time_elapsed[models[i][1]], roc_scores[models[i][1]] = models[i][0].evaluate(train_Xi, train_Xv, train_Y)
-        print(f"Evaluating {models[i][1]} Done. Time Elapsed: {time_elapsed[models[i][1]]}s")
+        print(f"Evaluating {models[i][1]} Done. Time Elapsed: {int(time_elapsed[models[i][1]] / 60)}m {time_elapsed[models[i][1]]-int(time_elapsed[models[i][1]] / 60)}s")
 
     print("===== Training Models Done =====")
 
@@ -47,10 +47,13 @@ with torch.cuda.device(0):
     date = now.strftime('%Y-%m-%d')
 
     fig, ax = plt.subplots()
+    ax.set_aspect('equal')
+    x = np.linspace(*ax.get_xlim())
+    ax.plot(x, x, color='black')
 
-    ax.ylim(-0.04, 1.04)
-    ax.xlabel('FPR')
-    ax.ylabel('TPR')
+    plt.ylim(-0.04, 1.04)
+    plt.xlabel('FPR')
+    plt.ylabel('TPR')
 
     for i, (mark, color) in enumerate(zip(
             ['s', 'o', 'v'], ['r', 'g', 'b'])):
@@ -60,16 +63,16 @@ with torch.cuda.device(0):
         for j in range(roc_scores[models[i][1]]):
             tpr.append([roc_scores[models[i][1]][j]["tpr"]])
             fpr.append([roc_scores[models[i][1]][j]["fpr"]])
-            ax.plot(fpr, tpr, color=color,
+
+            plt.plot(fpr, tpr, color=color,
                     marker=mark,
                     markerfacecolor='None',
                     markeredgecolor=color,
                     linestyle='None',
                     label=models[i][0])
 
-    ax.set_aspect('equal')
-    ax.title('ROC Score')
-    ax.legend(loc='lower right')
-    fig.savefig(f'{date}_roc_score.png')
+    plt.title('ROC Score')
+    plt.legend(loc='lower right')
+    plt.savefig(f'{date}_roc_score.png')
 
     plt.show()
