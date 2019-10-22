@@ -222,11 +222,19 @@ class ONN_NFM(torch.nn.Module):
 
         return accuracy / len(train_Y) * 100
 
-    def roc_score(self, pred, train_Y):
+
+    def evaluate(self, train_Xi, train_Xv, train_Y):
+        accuracy = []
+        roc = []
+        time_elapsed = 0
         confusion_matrix = {"tp": 0, "fp": 0, "tn": 0, "fn": 0}
 
-        for i in range(len(pred)):
-            if pred[i] == train_Y[i]:
+        start = time()
+        for i in range(len(train_Y)):
+            pred = self.predict(np.array(train_Xi[i]), np.array(train_Xv[i]))
+            self.partial_fit(np.array(train_Xi[i]), np.array(train_Xv[i]), np.array(train_Y[i]))
+
+            if pred == train_Y[i]:
                 if train_Y[i] == 1:
                     confusion_matrix["tp"] += 1
                 else:
@@ -237,24 +245,12 @@ class ONN_NFM(torch.nn.Module):
                 else:
                     confusion_matrix["fp"] += 1
 
-        tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fp'])
-        fpr = confusion_matrix['fp'] / (confusion_matrix['fp'] + confusion_matrix['tn'])
+            tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fp'] + 1e-16)
+            fpr = confusion_matrix['fp'] / (confusion_matrix['fp'] + confusion_matrix['tn'] + 1e-16)
 
-        return {"tpr": tpr, "fpr": fpr}
-
-    def evaluate(self, train_Xi, train_Xv, train_Y):
-        accuracy = []
-        roc = []
-        time_elapsed = 0
-
-        start = time()
-        for i in range(len(train_Y)):
-            pred = self.predict(np.array(train_Xi[i]), np.array(train_Xv[i]))
-            self.partial_fit(np.array(train_Xi[i]), np.array(train_Xv[i]), np.array(train_Y[i]))
-
+            accuracy.append((confusion_matrix['tp'] + confusion_matrix['tn']) / len(train_Y) * 100)
             if i % 1000 == 0:
-                accuracy.append(self.accuracy_score(pred, train_Y))
-                roc.append(self.roc_score(pred, train_Y))
+                roc.append({"tpr": tpr, "fpr": fpr})
 
         time_elapsed = time() - start
         return time_elapsed, accuracy, roc

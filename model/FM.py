@@ -116,7 +116,7 @@ class FM(torch.nn.Module):
     def accuracy_score(self, pred, train_Y):
         accuracy = 0
 
-        for i in range(pred.shape[0]):
+        for i in range(len(train_Y)):
             if pred[i] == train_Y[i]:
                 accuracy += 1
 
@@ -166,8 +166,8 @@ class FM(torch.nn.Module):
 
             pred = self.predict(train_Xi, train_Xv)
 
+            accuracy.append(self.accuracy_score(pred, train_Y))
             if i % 1000 == 0:
-                accuracy.append(self.accuracy_score(pred, train_Y))
                 roc.append(self.roc_score(pred, train_Y))
 
         time_elapsed = time() - start
