@@ -41,15 +41,29 @@ with torch.cuda.device(0):
 
     print("===== Training Models Done =====")
 
-    print("===== Drawing ROC Plot =====")
-
     now = datetime.datetime.now()
     date = now.strftime('%Y-%m-%d')
+
+    print("===== Drawing Accuracy Plot =====")
+    plt.ylim(-4, 104)
+    colors = ['r', 'g', 'b']
+
+    for i, color in enumerate(colors):
+        plt.plot([j for j in range(len(accuracy_scores[models[i][1]]))], accuracy_scores[models[i][1]],
+                 color=color, label=models[i][1])
+
+    plt.title('Accuracy Score')
+    plt.legend(loc='lower right')
+    plt.savefig(f'{date}_accuracy_score.png')
+    plt.grid()
+
+    plt.clf()
+    print("===== Drawing ROC Plot =====")
 
     fig, ax = plt.subplots()
     ax.set_aspect('equal')
     x = np.linspace(*ax.get_xlim())
-    ax.plot(x, x, color='black')
+    plt.plot(x, x, color='black')
 
     plt.ylim(-0.04, 1.04)
     plt.xlabel('FPR')
@@ -65,15 +79,14 @@ with torch.cuda.device(0):
             fpr.append([roc_scores[models[i][1]][j]["fpr"]])
 
         plt.plot(fpr, tpr, color=color,
-                marker=mark,
-                markerfacecolor='None',
-                markeredgecolor=color,
-                linestyle='None',
-                label=models[i][0])
+                 marker=mark,
+                 markerfacecolor='None',
+                 markeredgecolor=color,
+                 linestyle='None',
+                 label=models[i][1])
 
     plt.title('ROC Score')
     plt.legend(loc='lower right')
     plt.savefig(f'{date}_roc_score.png')
 
-    print("===== Drawing Accuracy Plot =====")
-
+    plt.show()
