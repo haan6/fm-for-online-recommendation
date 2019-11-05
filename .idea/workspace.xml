@@ -2,49 +2,47 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1b92fdf-e27a-4fea-9f27-537dbf02ca67" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/data/cod-rna2/cod-rna2.scale" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/.idea/deployment.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/.idea/online_NFM.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/.idea/remote-mappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/.ipynb_checkpoints/NFM-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/.ipynb_checkpoints/Naive NFM-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/.ipynb_checkpoints/ONN_Usage_Example-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/.ipynb_checkpoints/Online FM-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/.ipynb_checkpoints/Untitled-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/check_dataset.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/data/criteo/category_emb.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/data/criteo/tiny_test_input.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/data/criteo/tiny_train_input.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/main_test_criteo_v1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/main_test_criteo_v2_onnnfm.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/model/.ipynb_checkpoints/NFM-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/model/.ipynb_checkpoints/NFM_debugging-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/model/FM.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/model/ONN_NFM.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/model/Online_CCFM.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/model/SGD_NFM.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/model/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/model/category_emb.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/model/test.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/model/tiny_test_input.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/model/tiny_train_input.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/utils/data_preprocess.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/online_NFM (2)/utils/setup.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/data_preprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/data_preprocess.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/FM.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/FM.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/ONN_NFM.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/ONN_NFM.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/SGD_NFM.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/SGD_NFM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/.idea/deployment.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/.idea/online_NFM.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/.idea/remote-mappings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/.ipynb_checkpoints/NFM-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/.ipynb_checkpoints/Naive NFM-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/.ipynb_checkpoints/ONN_Usage_Example-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/.ipynb_checkpoints/Online FM-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/.ipynb_checkpoints/Untitled-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/check_dataset.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/data/criteo/category_emb.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/data/criteo/tiny_test_input.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/data/criteo/tiny_train_input.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/main_test_criteo_v1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/main_test_criteo_v2_onnnfm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/model/.ipynb_checkpoints/NFM-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/model/.ipynb_checkpoints/NFM_debugging-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/model/FM.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/model/ONN_NFM.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/model/Online_CCFM.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/model/SGD_NFM.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/model/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/model/category_emb.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/model/test.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/model/tiny_test_input.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/model/tiny_train_input.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/utils/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/utils/data_preprocess.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/online_NFM (2)/utils/setup.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -136,6 +134,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="data_preprocess" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="SILAB-Online-Recommendation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="sftp://yeji@143.248.92.108:2000/home/yeji/Myenv/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.." />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/data_preprocess.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SILAB-Online-Recommendation" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -161,10 +181,12 @@
     <list>
       <item itemvalue="Python.SILAB-Online-Recommendation" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python.data_preprocess" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.test" />
+        <item itemvalue="Python.data_preprocess" />
       </list>
     </recent_temporary>
   </component>
@@ -183,7 +205,8 @@
       <workItem from="1571750424968" duration="1266000" />
       <workItem from="1571793090187" duration="2074000" />
       <workItem from="1571813099412" duration="1964000" />
-      <workItem from="1572931112211" duration="2466000" />
+      <workItem from="1572931112211" duration="8648000" />
+      <workItem from="1572951245109" duration="1116000" />
     </task>
     <task id="LOCAL-00001" summary="Add configurations">
       <created>1571712568440</created>
@@ -248,7 +271,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571818369590</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Fix error in calculating roc scores">
+      <created>1572933743499</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1572933743499</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -276,10 +306,12 @@
     <MESSAGE value="Fix errors" />
     <MESSAGE value="Add the figure directory" />
     <MESSAGE value="Add plt codes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add plt codes" />
+    <MESSAGE value="Fix error in calculating roc scores" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix error in calculating roc scores" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SILAB_Online_Recommendation$test.coverage" NAME="test Coverage Results" MODIFIED="1572933310337" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SILAB_Online_Recommendation$test.coverage" NAME="test Coverage Results" MODIFIED="1572938977729" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SILAB_Online_Recommendation$SILAB_Online_Recommendation.coverage" NAME="SILAB-Online-Recommendation Coverage Results" MODIFIED="1571712455254" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SILAB_Online_Recommendation$data_preprocess.coverage" NAME="data_preprocess Coverage Results" MODIFIED="1572934777027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
   </component>
 </project>

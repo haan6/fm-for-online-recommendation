@@ -28,7 +28,7 @@ class SGD_NFM(torch.nn.Module):
 
         # Check CUDA
         if torch.cuda.is_available() and use_cuda:
-            print("SGD NFM:  CUDA")
+            print("SGD NFM: Using CUDA")
 
         self.device = torch.device("cuda:0" if torch.cuda.is_available() and use_cuda else "cpu")
 

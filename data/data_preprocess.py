@@ -80,6 +80,8 @@ def balance_criteo_data(file_path, emb_file):
     return result
 
 def read_svm_file(file_path, permutation=False):
+    result = {'size': 0, 'label': [], 'index': [], 'value': [], 'feature_sizes':[]}
+
     X, y = load_svmlight_file(file_path, n_features=8)
     X = X.toarray()
 
@@ -89,9 +91,17 @@ def read_svm_file(file_path, permutation=False):
         x_train_s = np.asarray(X[idx])
         rate_train_s = np.asarray(y[idx])
     else:
-        x_train_s = np.asarray(X)
-        rate_train_s = np.asarray(y)
+        x_train_s = np.asarray(X * 10000000).astype(int)
+        rate_train_s = np.asarray(y).astype(int)
 
-    down_sampling = 5
-    inputs_matrix = torch.tensor(x_train_s[0:x_train_s.size:down_sampling]).double()
-    outputs = torch.tensor(rate_train_s[0:x_train_s.size:down_sampling]).double()
+    feature_sizes = {str(i): set() for i in range(1, 9)}
+    for xi in x_train_s:
+        for i, emb in enumerate(xi):
+            feature_sizes[str(i+1)].add(emb)
+
+    result['size'] = len(x_train_s)
+    result['label'] = rate_train_s
+    result['index'] = x_train_s
+    result['value'] = [[1, 1, 1, 1, 1, 1, 1, 1] for i in range(result['size'])]
+    result['feature_sizes'] = np.asarray([len(feature) for feature in feature_sizes.values()]).astype(int)
+    return result

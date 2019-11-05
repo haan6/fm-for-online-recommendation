@@ -61,7 +61,6 @@ class ONN_NFM(torch.nn.Module):
         self.bias = Parameter(torch.randn(1)).to(self.device)
 
         # Neural Networks Part
-
         self.hidden_layers = []
         self.output_layers = []
 
