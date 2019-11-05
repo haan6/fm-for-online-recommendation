@@ -168,30 +168,21 @@ class SGD_NFM(torch.nn.Module):
                 else:
                     confusion_matrix["fp"] += 1
 
-        tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fp'])
-        fpr = confusion_matrix['fp'] / (confusion_matrix['fp'] + confusion_matrix['tn'])
+        tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fn'] + 1e-16)
+        fpr = confusion_matrix['fp'] / (confusion_matrix['fp'] + confusion_matrix['tn'] + 1e-16)
 
         return {"tpr": tpr, "fpr": fpr}
 
     def evaluate(self, train_Xi, train_Xv, train_Y):
         train_size = len(train_Y)
-
-        time_elapsed = 0
-        confusion_matrix = {
-            "tp": 0, "fp": 0, "tn": 0, "fn": 0
-        }
         accuracy = []
         roc = []
 
         start = time()
-        for i in range(train_size):
-            end = i + self.batch_size
-            if end < train_size:
-                self.fit(train_Xi[i:end], train_Xv[i:end], train_Y[i:end])
-            else:
-                self.fit(train_Xi[i:train_size], train_Xv[i:train_size], train_Y[i:train_size])
-
+        for i in range(self.batch_size, train_size):
             pred = self.predict(train_Xi, train_Xv)
+            start = i - self.batch_size
+            self.fit(train_Xi[start:i], train_Xv[start:i], train_Y[start:i])
 
             accuracy.append(self.accuracy_score(pred, train_Y))
             if i % 1000 == 0:

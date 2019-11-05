@@ -7,6 +7,9 @@ This script is used to preprocess the raw data file
 """
 
 import random
+import torch
+from sklearn.datasets import load_svmlight_file
+import numpy as np
 
 def load_criteo_category_index(file_path):
     f = open(file_path, 'r')
@@ -75,3 +78,20 @@ def balance_criteo_data(file_path, emb_file):
     result['size'] = len(result['value'])
 
     return result
+
+def read_svm_file(file_path, permutation=False):
+    X, y = load_svmlight_file(file_path, n_features=8)
+    X = X.toarray()
+
+    permutation = False
+    if permutation:
+        idx = np.random.permutation(X.shape[0])
+        x_train_s = np.asarray(X[idx])
+        rate_train_s = np.asarray(y[idx])
+    else:
+        x_train_s = np.asarray(X)
+        rate_train_s = np.asarray(y)
+
+    down_sampling = 5
+    inputs_matrix = torch.tensor(x_train_s[0:x_train_s.size:down_sampling]).double()
+    outputs = torch.tensor(rate_train_s[0:x_train_s.size:down_sampling]).double()
