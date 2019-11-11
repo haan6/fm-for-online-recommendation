@@ -20,9 +20,9 @@ import torch.backends.cudnn
 
 class FM(torch.nn.Module):
     def __init__(self, field_size, feature_sizes, embedding_size=4, is_shallow_dropout=True,
-                 dropout_shallow=[0.5], n_epochs=64, batch_size=256, interaction_type=True,
-                 verbose=False, random_seed=990211, weight_decay=0.0, loss_type='logloss',
-                 b=0.99, n=0.01, eval_metric=roc_auc_score, use_cuda=True, greater_is_better=True):
+                 dropout_shallow=[0.5], batch_size=256, interaction_type=True,
+                 verbose=False, loss_type='logloss',
+                 b=0.99, n=0.01, eval_metric=roc_auc_score, use_cuda=True):
         super(FM, self).__init__()
 
         # Check CUDA
@@ -40,12 +40,9 @@ class FM(torch.nn.Module):
         self.interaction_type = interaction_type
         self.n = n
         self.verbose = verbose
-        self.weight_decay = weight_decay
-        self.random_seed = random_seed
         self.loss_type = loss_type
         self.eval_metric = eval_metric
         self.use_cuda = use_cuda
-        self.greater_is_better = greater_is_better
 
         self.b = Parameter(torch.tensor(b), requires_grad=False).to(self.device)
 

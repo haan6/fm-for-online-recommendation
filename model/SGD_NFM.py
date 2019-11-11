@@ -20,8 +20,8 @@ from sklearn.metrics import roc_auc_score
 
 class SGD_NFM(torch.nn.Module):
     def __init__(self, field_size, feature_sizes, max_num_hidden_layers, qtd_neuron_per_hidden_layer,
-                 dropout_shallow=[0.5], embedding_size=4, n_classes=2, n_epochs=64, batch_size=100,
-                 loss_type='logloss', verbose=False, interaction_type=True, eval_metric=accuracy_score,
+                 dropout_shallow=[0.5], embedding_size=4, n_classes=2, batch_size=100,
+                 loss_type='logloss', verbose=False, interaction_type=True, eval_metric=roc_auc_score,
                  b=0.99, n=0.01, s=0.2, use_cuda=True, greater_is_better=True):
 
         super(SGD_NFM, self).__init__()
@@ -38,7 +38,6 @@ class SGD_NFM(torch.nn.Module):
         self.qtd_neuron_per_hidden_layer = qtd_neuron_per_hidden_layer
         self.dropout_shallow = dropout_shallow
         self.embedding_size = embedding_size
-        self.n_epochs = n_epochs
         self.n_classes = n_classes
         self.batch_size = batch_size
         self.loss_type = loss_type

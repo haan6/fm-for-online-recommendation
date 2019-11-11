@@ -85,23 +85,26 @@ def read_svm_file(file_path, permutation=False):
     X, y = load_svmlight_file(file_path, n_features=8)
     X = X.toarray()
 
-    permutation = False
     if permutation:
         idx = np.random.permutation(X.shape[0])
         x_train_s = np.asarray(X[idx])
         rate_train_s = np.asarray(y[idx])
     else:
-        x_train_s = np.asarray(X * 10000000).astype(int)
+        x_train_s = np.asarray(X)
         rate_train_s = np.asarray(y).astype(int)
 
-    feature_sizes = {str(i): set() for i in range(1, 9)}
+    feature_sizes = {str(i): [] for i in range(1, 9)}
     for xi in x_train_s:
         for i, emb in enumerate(xi):
-            feature_sizes[str(i+1)].add(emb)
+            try:
+                xi[i] = feature_sizes[str(i+1)].index(emb)
+            except ValueError:
+                feature_sizes[str(i+1)].append(emb)
+                xi[i] = feature_sizes[str(i + 1)].index(emb)
 
     result['size'] = len(x_train_s)
-    result['label'] = rate_train_s
-    result['index'] = x_train_s
+    result['label'] = np.where(rate_train_s==-1, 0, rate_train_s)
+    result['index'] = x_train_s.astype(int)
     result['value'] = [[1, 1, 1, 1, 1, 1, 1, 1] for i in range(result['size'])]
     result['feature_sizes'] = np.asarray([len(feature) for feature in feature_sizes.values()]).astype(int)
     return result
