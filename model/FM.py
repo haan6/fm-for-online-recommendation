@@ -110,19 +110,17 @@ class FM(torch.nn.Module):
 
         return pred.data.numpy() > 0.5
 
-    def accuracy_score(self, pred, train_Y):
-        accuracy = 0
 
-        for i in range(len(train_Y)):
-            if pred[i] == train_Y[i]:
-                accuracy += 1
-
-        return accuracy / len(train_Y) * 100
-
-    def roc_score(self, pred, train_Y):
+    def evaluate(self, train_Xi, train_Xv, train_Y):
+        train_size = len(train_Y)
+        accuracy = []
         confusion_matrix = {"tp": 0, "fp": 0, "tn": 0, "fn": 0}
+        roc = []
 
-        for i in range(pred.shape[0]):
+        start = time()
+        for i in range(self.batch_size, train_size):
+            pred = self.predict(train_Xi[i], train_Xv[i])
+
             if pred[i] == train_Y[i]:
                 if train_Y[i] == 1:
                     confusion_matrix["tp"] += 1
@@ -134,25 +132,14 @@ class FM(torch.nn.Module):
                 else:
                     confusion_matrix["fp"] += 1
 
-        tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fn'] + 1e-16)
-        fpr = confusion_matrix['fp'] / (confusion_matrix['fp'] + confusion_matrix['tn'] + 1e-16)
-
-        return {"tpr": tpr, "fpr": fpr}
-
-    def evaluate(self, train_Xi, train_Xv, train_Y):
-        train_size = len(train_Y)
-        accuracy = []
-        roc = []
-
-        start = time()
-        for i in range(self.batch_size, train_size):
-            pred = self.predict(train_Xi, train_Xv)
             start = i - self.batch_size
             self.fit(train_Xi[start:i], train_Xv[start:i], train_Y[start:i])
 
-            accuracy.append(self.accuracy_score(pred, train_Y))
-            if i % 1000 == 0:
+            if i % 100 == 0:
+                tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fn'] + 1e-16)
+                fpr = confusion_matrix['fp'] / (confusion_matrix['fp'] + confusion_matrix['tn'] + 1e-16)
                 roc.append(self.roc_score(pred, train_Y))
+                accuracy.append(self.accuracy_score(pred, train_Y))
 
         time_elapsed = time() - start
         return time_elapsed, accuracy, roc

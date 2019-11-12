@@ -232,17 +232,12 @@ class ONN_NFM(torch.nn.Module):
                 else:
                     confusion_matrix["fp"] += 1
                     
-            accuracy.append((confusion_matrix['tp'] + confusion_matrix['tn']) / (i+1) * 100)
 
-            if i % 1000 == 0:
-                if confusion_matrix['tp'] + confusion_matrix['fp'] != 0:
-                    tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fp'])
-                else:
-                    tpr = 0
-                if confusion_matrix['fp'] + confusion_matrix['tn'] != 0:
-                    fpr = confusion_matrix['fp'] / (confusion_matrix['fp'] + confusion_matrix['tn'])
-                else:
-                    fpr = 0
+            if i % 100 == 0:
+                tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fn'] + 1e-16)
+                fpr = confusion_matrix['fp'] / (confusion_matrix['fp'] + confusion_matrix['tn'] + 1e-16)
                 roc.append({'tpr': tpr, 'fpr': fpr})
+                accuracy.append(((confusion_matrix['tp'] + confusion_matrix['tn']) / (i + 1) * 100))
+
         time_elapsed = time() - start
         return time_elapsed, accuracy, roc
