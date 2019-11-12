@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 
 def plot_scores(filename):
-    with open(f'performance/{filename}.pickle', 'wb') as f:
+    with open(f'performance/{filename}.pickle', 'rb') as f:
          result = pickle.load(f)
 
     print("===== Drawing Accuracy Plot =====")
@@ -16,11 +16,11 @@ def plot_scores(filename):
                  color=colors[i], label=key)
 
     plt.title('Accuracy Score')
-    ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.05),
-              ncol=1, fancybox=True, shadow=True)
-    plt.savefig(f'performance/figure/{filename}_accuracy_score.png')
+    ax.legend(loc='lower center', bbox_to_anchor=(0.5, 0.1),
+              ncol=1, fancybox=True, shadow=True, fontsize='xx-small')
     plt.grid()
-    plt.clf()
+    plt.savefig(f'performance/figure/{filename}_accuracy_score.png')
+    plt.show()
     print("===== Drawing ROC Plot =====")
 
     fig, ax = plt.subplots()
@@ -39,19 +39,21 @@ def plot_scores(filename):
         tpr = []
         fpr = []
 
-        for j in range(len(result['roc_scores'][key])):
+        for j in range(0, len(result['roc_scores'][key]), 10):
             tpr.append([result['roc_scores'][key][j]["tpr"]])
             fpr.append([result['roc_scores'][key][j]["fpr"]])
 
         plt.plot(fpr, tpr, color=color,
-                 marker=mark,
+                 marker=mark[i],
                  markerfacecolor='None',
-                 markeredgecolor=color,
+                 markeredgecolor=color[i],
                  linestyle='None',
                  label=key)
 
     plt.title('ROC Score')
-    ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.05),
-              ncol=1, fancybox=True, shadow=True)
-    plt.savefig(f'performance/figure/{filename}_accuracy_score.png')
+    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2),
+              ncol=1, fancybox=True, shadow=True, fontsize='xx-small')
+    plt.savefig(f'performance/figure/{filename}_roc_score.png')
     plt.show()
+
+plot_scores("Exp1_Datasetcod-rna2_NClasses2_Date2019-11-12_ver1_DataNum59535")

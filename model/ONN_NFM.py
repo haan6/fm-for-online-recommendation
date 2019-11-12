@@ -231,7 +231,6 @@ class ONN_NFM(torch.nn.Module):
                     confusion_matrix["fn"] += 1
                 else:
                     confusion_matrix["fp"] += 1
-                    
 
             if i % 100 == 0:
                 tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fn'] + 1e-16)
@@ -239,5 +238,6 @@ class ONN_NFM(torch.nn.Module):
                 roc.append({'tpr': tpr, 'fpr': fpr})
                 accuracy.append(((confusion_matrix['tp'] + confusion_matrix['tn']) / (i + 1) * 100))
 
-        time_elapsed = time() - start
+        end = time()
+        time_elapsed = end - start
         return time_elapsed, accuracy, roc

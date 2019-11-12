@@ -174,5 +174,7 @@ class SGD_NFM(torch.nn.Module):
                 roc.append({'tpr': tpr, 'fpr': fpr})
                 accuracy.append(((confusion_matrix['tp'] + confusion_matrix['tn']) / (i + 1) * 100))
 
-        time_elapsed = time() - start
+        end = time()
+        print(start, end)
+        time_elapsed = end - start
         return time_elapsed, accuracy, roc

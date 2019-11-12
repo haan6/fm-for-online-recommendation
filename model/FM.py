@@ -121,7 +121,7 @@ class FM(torch.nn.Module):
         for i in range(self.batch_size, train_size):
             pred = self.predict(train_Xi[i], train_Xv[i])
 
-            if pred[i] == train_Y[i]:
+            if pred == train_Y[i]:
                 if train_Y[i] == 1:
                     confusion_matrix["tp"] += 1
                 else:
@@ -138,8 +138,10 @@ class FM(torch.nn.Module):
             if i % 100 == 0:
                 tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fn'] + 1e-16)
                 fpr = confusion_matrix['fp'] / (confusion_matrix['fp'] + confusion_matrix['tn'] + 1e-16)
-                roc.append(self.roc_score(pred, train_Y))
-                accuracy.append(self.accuracy_score(pred, train_Y))
+                roc.append({'tpr': tpr, 'fpr': fpr})
+                accuracy.append(((confusion_matrix['tp'] + confusion_matrix['tn']) / (i + 1) * 100))
 
-        time_elapsed = time() - start
+        end = time()
+        print(start, end)
+        time_elapsed = end - start
         return time_elapsed, accuracy, roc
