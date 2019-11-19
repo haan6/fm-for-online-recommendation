@@ -64,10 +64,10 @@ if dataset_name == 'criteo':
     train_dict = data_preprocess.balance_criteo_data('data/criteo/tiny_train_input.csv', 'data/criteo/category_emb.csv')
     train_dict_size = int(train_dict['size'] * 0.2)
 elif dataset_name == 'cod-rna2':
-    train_dict = data_preprocess.read_svm_file('data/cod-rna2/cod-rna2.scale')
+    train_dict = data_preprocess.read_svm_file('data/cod-rna2/cod-rna2.scale', True)
     train_dict_size = train_dict['size']
 elif dataset_name == 'balanced-cod-rna2':
-    train_dict = data_preprocess.read_svm_file('data/cod-rna2/cod-rna2.scale', True)
+    train_dict = data_preprocess.balance_svm_data('data/cod-rna2/cod-rna2.scale')
     train_dict_size = train_dict['size']
 else:
     train_dict = data_preprocess.balance_criteo_data('data/cod-rna2/tiny_train_input.csv', 'data/cod-rna2/category_emb.csv')
@@ -85,27 +85,26 @@ print(f"===== Dataset Ready -- # of Data: {int(train_dict_size)} -- =====")
 
 
 with torch.cuda.device(0):
-    model_names = ['FM', 'SGD_NFM', 'ONN_NFM']
+    model_names = ['ONN_NFM_V4', 'FM', 'SGD_NFM', 'ONN_NFM']
     result = {'model': dict(), 'time_elapsed': dict(), 'accuracy_scores': dict(), 'roc_scores': dict()}
 
     print("===== Instantiating Models =====")
     for name in model_names:
         instance, model_name = _make_models(field_size,
-                                         train_dict['feature_sizes'],
-                                         max_num_hidden_layers,
-                                         qtd_neuron_per_hidden_layer,
-                                         dropout_shallow=[0.5],
-                                         embedding_size=embedding_size,
-                                         n_classes=2,
-                                         batch_size=batch_size,
-                                         verbose=False,
-                                         interaction_type=True,
-                                         eval_metric=roc_auc_score,
-                                         b=0.99,
-                                         n=0.01,
-                                         s=0.2,
-                                         use_cuda=True,
-                                         model_name=name)
+                                            train_dict['feature_sizes'],
+                                            max_num_hidden_layers,
+                                            qtd_neuron_per_hidden_layer,
+                                            dropout_shallow=[0.5],
+                                            embedding_size=embedding_size,
+                                            batch_size=batch_size,
+                                            verbose=False,
+                                            interaction_type=True,
+                                            eval_metric=roc_auc_score,
+                                            b=0.99,
+                                            n=0.01,
+                                            s=0.2,
+                                            use_cuda=True,
+                                            model_name=name)
         result['model'][model_name] = instance
     print("===== Models Ready =====")
 

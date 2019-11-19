@@ -50,6 +50,7 @@ if option == "Option1":
     qtd_neuron_per_hidden_layer_list = [10, 10, 10, 10, 10]
     embedding_size_list = [4, 4, 4, 4, 4]
     n_list = [0.01, 0.01, 0.01, 0.01, 0.01]
+    variance = max_num_hidden_layers_list
 
 elif option == "Option2":
 ########################################################################################################################
@@ -57,8 +58,9 @@ elif option == "Option2":
 ########################################################################################################################
     max_num_hidden_layers_list = [5, 5, 5, 5, 5]
     qtd_neuron_per_hidden_layer_list = [1, 5, 10, 15, 20]
-    embedding_size = [4, 4, 4, 4, 4]
+    embedding_size_list = [4, 4, 4, 4, 4]
     n = [0.01, 0.01, 0.01, 0.01, 0.01]
+    variance = qtd_neuron_per_hidden_layer_list
 
 elif option == "Option3":
 ########################################################################################################################
@@ -66,8 +68,9 @@ elif option == "Option3":
 ########################################################################################################################
     max_num_hidden_layers_list = [5, 5, 5, 5, 5]
     qtd_neuron_per_hidden_layer_list = [10, 10, 10, 10, 10]
-    embedding_size = [1, 2, 4, 8, 16]
+    embedding_size_list = [1, 2, 4, 8, 16]
     n = [0.01, 0.01, 0.01, 0.01, 0.01]
+    variance = embedding_size_list
 
 elif option == "Option4":
 ########################################################################################################################
@@ -77,17 +80,19 @@ elif option == "Option4":
     qtd_neuron_per_hidden_layer_list = [10, 10, 10, 10, 10]
     embedding_size = [4, 4, 4, 4, 4]
     n = [0.1, 0.05, 0.01, 0.005, 0.001]
+    variance = n
 
 
 # elif option == "Option5":
-# ########################################################################################################################
-# # Option 5
-# ########################################################################################################################
+########################################################################################################################
+# Option 5
+########################################################################################################################
 else:
     max_num_hidden_layers_list = [5]
     qtd_neuron_per_hidden_layer_list = [10]
     embedding_size_list = [4]
     n_list = [0.01]
+    variance = None
 
 
 ########################################################################################################################
@@ -130,7 +135,6 @@ with torch.cuda.device(0):
                                          qtd_neuron_per_hidden_layer,
                                          dropout_shallow=[0.5],
                                          embedding_size=embedding_size,
-                                         n_classes=2,
                                          batch_size=1,
                                          verbose=False,
                                          interaction_type=True,
@@ -139,8 +143,8 @@ with torch.cuda.device(0):
                                          n=n,
                                          s=0.2,
                                          use_cuda=True,
-                                         model_name='ONN_NFM')
-        result['model'][model_name] = instance
+                                         model_name='ONN_NFM_V4')
+        result['model'][str(variance[i])] = instance
     print("===== Models Ready =====")
 
     for i, (option_name, model) in enumerate(result['model'].items()):

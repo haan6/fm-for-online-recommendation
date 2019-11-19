@@ -19,10 +19,22 @@ from sklearn.metrics import roc_auc_score
 
 
 class SGD_NFM(torch.nn.Module):
-    def __init__(self, field_size, feature_sizes, max_num_hidden_layers, qtd_neuron_per_hidden_layer,
-                 dropout_shallow=[0.5], embedding_size=4, n_classes=2, batch_size=100,
-                 loss_type='logloss', verbose=False, interaction_type=True, eval_metric=roc_auc_score,
-                 b=0.99, n=0.01, s=0.2, use_cuda=True, greater_is_better=True):
+    def __init__(self,
+                 field_size,
+                 feature_sizes,
+                 max_num_hidden_layers,
+                 qtd_neuron_per_hidden_layer,
+                 dropout_shallow=[0.5],
+                 embedding_size=4,
+                 n_classes=2,
+                 batch_size=100,
+                 loss_type='logloss',
+                 verbose=False,
+                 interaction_type=True,
+                 eval_metric=roc_auc_score,
+                 b=0.99,
+                 n=0.01,
+                 use_cuda=True):
 
         super(SGD_NFM, self).__init__()
 
@@ -45,7 +57,6 @@ class SGD_NFM(torch.nn.Module):
         self.interaction_type = interaction_type
         self.eval_metric = eval_metric
         self.use_cuda = use_cuda
-        self.greater_is_better = greater_is_better
         self.n = n
 
         self.b = Parameter(torch.tensor(b), requires_grad=False).to(self.device)
@@ -168,13 +179,11 @@ class SGD_NFM(torch.nn.Module):
 
             self.fit(train_Xi[start:i], train_Xv[start:i], train_Y[start:i])
 
-            if i % 100 == 0:
+            if i % 1000 == 0:
                 tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fn'] + 1e-16)
                 fpr = confusion_matrix['fp'] / (confusion_matrix['fp'] + confusion_matrix['tn'] + 1e-16)
                 roc.append({'tpr': tpr, 'fpr': fpr})
                 accuracy.append(((confusion_matrix['tp'] + confusion_matrix['tn']) / (i + 1) * 100))
 
-        end = time()
-        print(start, end)
-        time_elapsed = end - start
+        time_elapsed = time() - start
         return time_elapsed, accuracy, roc

@@ -9,7 +9,7 @@ def plot_scores(filename):
     print("===== Drawing Accuracy Plot =====")
     fig, ax = plt.subplots()
     plt.ylim(-4, 104)
-    colors = ['r', 'g', 'b']
+    colors = ['r', 'g', 'b', 'y']
 
     for i, key in enumerate(result['model'].keys()):
         plt.plot([j for j in range(len(result['accuracy_scores'][key]))], result['accuracy_scores'][key],
@@ -32,8 +32,8 @@ def plot_scores(filename):
     plt.xlabel('FPR')
     plt.ylabel('TPR')
 
-    mark = ['s', 'o', 'v']
-    color = ['r', 'g', 'b']
+    mark = ['s', 'o', 'v', '*']
+    color = ['r', 'g', 'b', 'y']
 
     for i, key in enumerate(result['model'].keys()):
         tpr = []
@@ -51,9 +51,8 @@ def plot_scores(filename):
                  label=key)
 
     plt.title('ROC Score')
-    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.2),
+    ax.legend(loc='upper center', bbox_to_anchor=(0.5, 0.1),
               ncol=1, fancybox=True, shadow=True, fontsize='xx-small')
+    plt.grid()
     plt.savefig(f'performance/figure/{filename}_roc_score.png')
     plt.show()
-
-plot_scores("Exp1_Datasetcod-rna2_NClasses2_Date2019-11-12_ver1_DataNum59535")

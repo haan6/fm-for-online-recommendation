@@ -19,10 +19,20 @@ from sklearn.metrics import roc_auc_score
 import torch.backends.cudnn
 
 class FM(torch.nn.Module):
-    def __init__(self, field_size, feature_sizes, embedding_size=4, is_shallow_dropout=True,
-                 dropout_shallow=[0.5], batch_size=256, interaction_type=True,
-                 verbose=False, loss_type='logloss',
-                 b=0.99, n=0.01, eval_metric=roc_auc_score, use_cuda=True):
+    def __init__(self,
+                 field_size,
+                 feature_sizes,
+                 embedding_size=4,
+                 is_shallow_dropout=True,
+                 dropout_shallow=[0.5],
+                 batch_size=256,
+                 interaction_type=True,
+                 verbose=False,
+                 loss_type='logloss',
+                 b=0.99,
+                 n=0.01,
+                 eval_metric=roc_auc_score,
+                 use_cuda=True):
         super(FM, self).__init__()
 
         # Check CUDA
@@ -135,13 +145,11 @@ class FM(torch.nn.Module):
             start = i - self.batch_size
             self.fit(train_Xi[start:i], train_Xv[start:i], train_Y[start:i])
 
-            if i % 100 == 0:
+            if i % 1000 == 0:
                 tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fn'] + 1e-16)
                 fpr = confusion_matrix['fp'] / (confusion_matrix['fp'] + confusion_matrix['tn'] + 1e-16)
                 roc.append({'tpr': tpr, 'fpr': fpr})
                 accuracy.append(((confusion_matrix['tp'] + confusion_matrix['tn']) / (i + 1) * 100))
 
-        end = time()
-        print(start, end)
-        time_elapsed = end - start
+        time_elapsed = time() - start
         return time_elapsed, accuracy, roc
