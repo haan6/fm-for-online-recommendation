@@ -41,7 +41,7 @@ class ONN_NFM_V4(torch.nn.Module):
 
         # Check CUDA
         if torch.cuda.is_available() and use_cuda:
-            print("Using CUDA")
+            print("ONN NFM V4: Using CUDA")
 
         self.device = torch.device("cuda:0" if torch.cuda.is_available() and use_cuda else "cpu")
 
@@ -204,7 +204,7 @@ class ONN_NFM_V4(torch.nn.Module):
         Y = Variable(torch.FloatTensor(Y)).to(self.device)
 
         self.train()
-        optimizer = torch.optim.SGD(self.parameters(), lr=self.n)
+        optimizer = torch.optim.Adam(self.parameters(), lr=self.n)
         criterion = F.binary_cross_entropy_with_logits
 
         optimizer.zero_grad()
@@ -238,6 +238,13 @@ class ONN_NFM_V4(torch.nn.Module):
         b = []
 
         for i in range(len(losses_per_layer)):
+            # if i == 0 :
+            #     optim2 = torch.optim.Adam(self.second_order_embeddings, lr=self.n2)
+            #     optim2.zero_grad()
+            #     loss = losses_per_layer[0].backward(retain_graph=True)
+            #     loss.backward()
+            #     optimizer.step()
+
             losses_per_layer[i].backward(retain_graph=True)
             self.output_layers[i].weight.data -= self.n * self.alpha[i] * self.output_layers[i].weight.grad.data
             self.output_layers[i].bias.data -= self.n * self.alpha[i] * self.output_layers[i].bias.grad.data
@@ -257,6 +264,7 @@ class ONN_NFM_V4(torch.nn.Module):
 
         self.alpha = Parameter(self.alpha / z_t, requires_grad=False).to(self.device)
 
+
         if show_loss:
             real_output = torch.sum(torch.mul(
                 self.alpha.view(self.max_num_hidden_layers, 1).repeat(1, self.batch_size).view(
@@ -275,7 +283,6 @@ class ONN_NFM_V4(torch.nn.Module):
 
 
     def partial_fit_(self, Xi_data, Xv_data, Y_data, Pseudo_Y_data, show_loss=False):
-
         self.update_weights(Xi_data, Xv_data, Y_data, show_loss)
 
 
@@ -293,19 +300,21 @@ class ONN_NFM_V4(torch.nn.Module):
 
 
     def predict_(self, Xi_data, Xv_data):
-        # output = self.forward_fm(Xi_data, Xv_data)
-        # output += ((self.alpha.reshape([-1, 1, 1])).mul(self.forward_onn(Xi_data, Xv_data)).sum(dim=0)).squeeze
-        # ()
+        output = self.forward_fm(Xi_data, Xv_data)
+        output += ((self.alpha.reshape([-1, 1, 1])).mul(self.forward_onn(Xi_data, Xv_data)).sum(dim=0)).squeeze()
         output = ((self.alpha.reshape([-1, 1, 1])).mul(self.forward_onn(Xi_data, Xv_data)).sum(dim=0)).squeeze()
         pred = torch.sigmoid(output).cpu()
         return 1.0 if pred.data.numpy() > 0.5 else 0.0
 
+    # def predict_(self, Xi_data, Xv_data):
+    #     return torch.argmax(torch.sum(torch.mul(
+    #         self.alpha.view(self.max_num_hidden_layers, 1).repeat(1, len(Xi_data)).view(
+    #             self.max_num_hidden_layers, len(Xi_data), 1), self.forward(Xi_data, Xv_data)), 0), dim=1).cpu().numpy()
 
 
     def predict(self, Xi_data, Xv_data):
         pred = self.predict_(Xi_data, Xv_data)
         return pred
-
 
     def evaluate(self, train_Xi, train_Xv, train_Y):
         accuracy = []
@@ -314,7 +323,7 @@ class ONN_NFM_V4(torch.nn.Module):
 
         start = time()
         for i in range(len(train_Y)):
-            pred = self.predict(np.array(train_Xi[i]), np.array(train_Xv[i]))
+            pred = self.predict(np.array([train_Xi[i]]), np.array([train_Xv[i]]))
             self.partial_fit(np.array(train_Xi[i]), np.array(train_Xv[i]), np.array([train_Y[i]]), np.array([pred]))
 
             if pred == train_Y[i]:

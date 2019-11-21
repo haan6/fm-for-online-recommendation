@@ -102,7 +102,7 @@ class FM(torch.nn.Module):
         Y = Variable(torch.FloatTensor(Y)).to(self.device)
 
         model = self.train()
-        optimizer = torch.optim.SGD(self.parameters(), lr=self.n)
+        optimizer = torch.optim.Adam(self.parameters(), lr=self.n)
         criterion = F.binary_cross_entropy_with_logits
 
         optimizer.zero_grad()
@@ -110,6 +110,9 @@ class FM(torch.nn.Module):
         loss = criterion(output, Y)
         loss.backward()
         optimizer.step()
+
+
+
 
     def predict(self, Xi_data, Xv_data):
         Xi = Variable(torch.LongTensor(Xi_data).reshape(-1, self.field_size, 1)).to(self.device)

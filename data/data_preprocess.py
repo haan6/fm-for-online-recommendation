@@ -42,6 +42,7 @@ def read_criteo_data(file_path, emb_file):
 
     result['size'] += len(result['value'])
 
+
     return result
 
 def balance_criteo_data(file_path, emb_file):
@@ -137,9 +138,9 @@ def balance_svm_data(file_path):
         balanced_Xv.append(result['value'][i])
         balanced_Y.append(result['label'][i])
 
-    result['index'] = balanced_Xi
-    result['value'] = balanced_Xv
-    result['label'] = balanced_Y
+    result['index'] = np.asarray(balanced_Xi)
+    result['value'] = np.asarray(balanced_Xv)
+    result['label'] = np.asarray(balanced_Y)
 
     result['size'] = len(result['value'])
 

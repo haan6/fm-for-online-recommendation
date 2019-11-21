@@ -85,7 +85,7 @@ print(f"===== Dataset Ready -- # of Data: {int(train_dict_size)} -- =====")
 
 
 with torch.cuda.device(0):
-    model_names = ['ONN_NFM_V4', 'FM', 'SGD_NFM', 'ONN_NFM']
+    model_names = ['ONN_NFM', 'FM', 'NFM', 'ONN_NFM_V4']
     result = {'model': dict(), 'time_elapsed': dict(), 'accuracy_scores': dict(), 'roc_scores': dict()}
 
     print("===== Instantiating Models =====")

@@ -1,5 +1,5 @@
 from model.FM import *
-from model.SGD_NFM import *
+from model.NFM import *
 from model.ONN_NFM import *
 from model.ONN_NFM_v4 import *
 
@@ -36,8 +36,8 @@ def _make_models(field_size,
                             embedding_size=embedding_size,
                             batch_size=batch_size,
                             n=n)
-    elif model_name == 'SGD_NFM':
-        model_instance = SGD_NFM(field_size=field_size,
+    elif model_name == 'NFM':
+        model_instance = NFM(field_size=field_size,
                                  feature_sizes=feature_sizes,
                                  max_num_hidden_layers=max_num_hidden_layers,
                                  qtd_neuron_per_hidden_layer=qtd_neuron_per_hidden_layer,

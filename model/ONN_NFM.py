@@ -20,8 +20,10 @@ from sklearn.metrics import roc_auc_score
 
 import torch.backends.cudnn
 
+from data.data_preprocess import balance_criteo_data
+
 class ONN_NFM(torch.nn.Module):
-    def __init__(self, field_size, feature_sizes, max_num_hidden_layers, qtd_neuron_per_hidden_layer,
+    def __init__(self, field_size, feature_sizes, max_num_hidden_layers=5, qtd_neuron_per_hidden_layer=10,
                  dropout_shallow=[0.5], embedding_size=4, n_classes=2, batch_size=1,
                  verbose=False, interaction_type=True, eval_metric=roc_auc_score,
                  b=0.99, n=0.01, s=0.2, use_cuda=True):
@@ -197,19 +199,25 @@ class ONN_NFM(torch.nn.Module):
     #     return ((self.alpha.reshape([-1, 1, 1])).mul(self.forward(Xi_data, Xv_data)).sum(dim=0).argmax(dim=1).squeeze()).cpu().numpy()
 
     # version2
-    def predict_(self, Xi_data, Xv_data):
-        idx = self.alpha.argmax()
+    # def predict_(self, Xi_data, Xv_data):
+    #     idx = self.alpha.argmax()
         #print(self.alpha)
         # print(self.forward(Xi_data, Xv_data)[idx,:,:])
         # print(self.forward(Xi_data, Xv_data)[idx,:,:].argmax())
 
 
         #return ((self.alpha.reshape([-1, 1, 1])).mul(self.forward(Xi_data, Xv_data)).sum(dim=0).argmax(dim=1).squeeze()).cpu().numpy()
-        return (self.forward(Xi_data, Xv_data)[idx,:,:].argmax()).cpu().numpy()
+        # return (self.forward(Xi_data, Xv_data)[idx,:,:].argmax()).cpu().numpy()
+
+    def predict_(self, Xi_data, Xv_data):
+        return torch.argmax(torch.sum(torch.mul(
+            self.alpha.view(self.max_num_hidden_layers, 1).repeat(1, len(Xi_data)).view(
+                self.max_num_hidden_layers, len(Xi_data), 1), self.forward(Xi_data, Xv_data)), 0), dim=1).cpu().numpy()
+
 
     def predict(self, Xi_data, Xv_data):
         pred = self.predict_(Xi_data, Xv_data)
-        return pred
+        return pred[0]
 
     def evaluate(self, train_Xi, train_Xv, train_Y):
         accuracy = []
@@ -218,8 +226,8 @@ class ONN_NFM(torch.nn.Module):
 
         start = time()
         for i in range(len(train_Y)):
-            pred = self.predict(np.array(train_Xi[i]), np.array(train_Xv[i]))
-            self.partial_fit(np.array(train_Xi[i]), np.array(train_Xv[i]), np.array(train_Y[i]))
+            pred = self.predict(np.asarray(train_Xi[i]), np.asarray(train_Xv[i]))
+            self.partial_fit(np.asarray(train_Xi[i]), np.asarray(train_Xv[i]), np.asarray(train_Y[i]))
 
             if pred == train_Y[i]:
                 if train_Y[i] == 1:
