@@ -137,13 +137,12 @@ class NFM(torch.nn.Module):
         optimizer = torch.optim.Adam(self.parameters(), lr=self.n)
         criterion = F.binary_cross_entropy_with_logits
 
-        epoch_begin_time = time()
-
         optimizer.zero_grad()
         output = model(Xi, Xv)
         loss = criterion(output, Y)
         loss.backward()
         optimizer.step()
+
 
     def predict(self, Xi_data, Xv_data):
         Xi = Variable(torch.LongTensor(Xi_data).reshape(-1, self.field_size, 1)).to(self.device)
@@ -162,9 +161,9 @@ class NFM(torch.nn.Module):
         roc = []
 
         start = time()
-        for i in range(self.batch_size, train_size):
+        for i in range(train_size):
             pred = self.predict(train_Xi[i], train_Xv[i])
-            start = i - self.batch_size
+            self.fit([train_Xi[i]], [train_Xv[i]], [train_Y[i]])
 
             if pred == train_Y[i]:
                 if train_Y[i] == 1:
@@ -177,7 +176,6 @@ class NFM(torch.nn.Module):
                 else:
                     confusion_matrix["fp"] += 1
 
-            self.fit(train_Xi[start:i], train_Xv[start:i], train_Y[start:i])
 
             if i % 1000 == 0:
                 tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fn'] + 1e-16)

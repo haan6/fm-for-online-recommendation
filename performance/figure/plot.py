@@ -9,6 +9,8 @@ def plot_scores(filename):
     print("===== Drawing Accuracy Plot =====")
     fig, ax = plt.subplots()
     plt.ylim(-4, 104)
+    plt.xlabel('# of Data')
+    plt.ylabel('Accuracy (%)')
     colors = ['r', 'g', 'b', 'y']
 
     for i, key in enumerate(result['model'].keys()):

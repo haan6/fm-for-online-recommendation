@@ -90,7 +90,7 @@ class FM(torch.nn.Module):
                                     for i, emb in enumerate(self.second_order_embeddings)]
             weights_fm = []
             for i in range(self.field_size):
-                for j in range(i + 1, self.field_size):
+                for j in range(i+1, self.field_size):
                     weights_fm.append(second_order_emb_arr[i] * second_order_emb_arr[j])
 
         total_sum = self.b + torch.sum(first_order, 1) + torch.sum(second_order, 1)
@@ -111,9 +111,6 @@ class FM(torch.nn.Module):
         loss.backward()
         optimizer.step()
 
-
-
-
     def predict(self, Xi_data, Xv_data):
         Xi = Variable(torch.LongTensor(Xi_data).reshape(-1, self.field_size, 1)).to(self.device)
         Xv = Variable(torch.FloatTensor(Xv_data).reshape(-1, self.field_size)).to(self.device)
@@ -131,8 +128,9 @@ class FM(torch.nn.Module):
         roc = []
 
         start = time()
-        for i in range(self.batch_size, train_size):
+        for i in range(train_size):
             pred = self.predict(train_Xi[i], train_Xv[i])
+            self.fit([train_Xi[i]], [train_Xv[i]], [train_Y[i]])
 
             if pred == train_Y[i]:
                 if train_Y[i] == 1:
@@ -144,9 +142,6 @@ class FM(torch.nn.Module):
                     confusion_matrix["fn"] += 1
                 else:
                     confusion_matrix["fp"] += 1
-
-            start = i - self.batch_size
-            self.fit(train_Xi[start:i], train_Xv[start:i], train_Y[start:i])
 
             if i % 1000 == 0:
                 tpr = confusion_matrix['tp'] / (confusion_matrix['tp'] + confusion_matrix['fn'] + 1e-16)

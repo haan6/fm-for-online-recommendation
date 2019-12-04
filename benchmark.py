@@ -62,16 +62,19 @@ print("======Save Path Done======")
 print("===== Importing Dataset =====")
 if dataset_name == 'criteo':
     train_dict = data_preprocess.balance_criteo_data('data/criteo/tiny_train_input.csv', 'data/criteo/category_emb.csv')
-    train_dict_size = int(train_dict['size'] * 0.2)
+    train_dict_size = int(train_dict['size'] * 0.5)
+
 elif dataset_name == 'cod-rna2':
     train_dict = data_preprocess.read_svm_file('data/cod-rna2/cod-rna2.scale', True)
     train_dict_size = train_dict['size']
+
 elif dataset_name == 'balanced-cod-rna2':
     train_dict = data_preprocess.balance_svm_data('data/cod-rna2/cod-rna2.scale')
     train_dict_size = train_dict['size']
+
 else:
-    train_dict = data_preprocess.balance_criteo_data('data/cod-rna2/tiny_train_input.csv', 'data/cod-rna2/category_emb.csv')
-    train_dict_size = int(train_dict['size'] * 0.2)
+    train_dict = data_preprocess.balance_criteo_data('data/criteo/tiny_train_input.csv', 'data/criteo/category_emb.csv')
+    train_dict_size = int(train_dict['size'] * 0.5)
 
 save_filename += '_DataNum' + str(train_dict_size)
 field_size = len(train_dict['feature_sizes'])
@@ -85,7 +88,7 @@ print(f"===== Dataset Ready -- # of Data: {int(train_dict_size)} -- =====")
 
 
 with torch.cuda.device(0):
-    model_names = ['ONN_NFM', 'FM', 'NFM', 'ONN_NFM_V4']
+    model_names = ['ONN_NFM', 'FM', 'NFM']
     result = {'model': dict(), 'time_elapsed': dict(), 'accuracy_scores': dict(), 'roc_scores': dict()}
 
     print("===== Instantiating Models =====")

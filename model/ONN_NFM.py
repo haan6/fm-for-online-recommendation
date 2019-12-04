@@ -59,6 +59,13 @@ class ONN_NFM(torch.nn.Module):
             self.first_order_dropout = nn.Dropout(self.dropout_shallow[0]).to(self.device)
         self.second_order_embeddings = nn.ModuleList([nn.Embedding(feature_size, self.embedding_size)
                                                       for feature_size in self.feature_sizes]).to(self.device)
+
+        for i in range(len(self.first_order_embeddings)):
+            self.first_order_embeddings[i].weight.requires_grad =True
+
+        for j in range(len(self.second_order_embeddings)):
+            self.second_order_embeddings[j].weight.requires_grad = True
+
         self.bias = Parameter(torch.randn(1)).to(self.device)
 
         # Neural Networks Part
@@ -92,10 +99,19 @@ class ONN_NFM(torch.nn.Module):
             self.hidden_layers[i].weight.grad.data.fill_(0)
             self.hidden_layers[i].bias.grad.data.fill_(0)
 
-    def second_order(self, Xi, Xv):
-        # FM Part
+
+    def forward(self, Xi, Xv):
         Xi = torch.LongTensor(Xi).to(self.device).reshape(-1, self.field_size, 1)
         Xv = torch.FloatTensor(Xv).to(self.device).reshape(-1, self.field_size)
+
+        # FM
+        first_order_emb_arr = [(torch.sum(emb(Xi[:, i, :]), 1).t() * Xv[:, i]).t()
+                               for i, emb in enumerate(self.first_order_embeddings)]
+        first_order = torch.cat(first_order_emb_arr, 1)
+
+        if self.dropout_shallow:
+            first_order = self.first_order_dropout(first_order)
+
         second_order_emb_arr = [torch.sum(emb(Xi[:, i, :]), 1).t() * Xv[:, i].t()
                                 for i, emb in enumerate(self.second_order_embeddings)]
         sum_second_order_emb = sum(second_order_emb_arr)
@@ -106,11 +122,8 @@ class ONN_NFM(torch.nn.Module):
         second_order_emb_square_sum = sum(second_order_emb_square)
         second_order = (sum_second_order_emb_square - second_order_emb_square_sum) * 0.5
 
-        return second_order.t()
-
-    def forward(self, Xi, Xv):
         # Neural Networks Part
-        x = self.second_order(Xi, Xv)
+        x = second_order.t()
 
         hidden_connections = []
         activation = F.relu
@@ -124,10 +137,11 @@ class ONN_NFM(torch.nn.Module):
 
         output_class = []
         for i in range(self.max_num_hidden_layers):
-            output_class.append(self.output_layers[i](hidden_connections[i]))
+            output_class.append(self.output_layers[i](hidden_connections[i]) + torch.sum(first_order, 1))
 
         pred_per_layer = torch.stack(output_class)
         return pred_per_layer
+
 
     def update_weights(self, Xi, Xv, Y, show_loss):
         Y = torch.from_numpy(Y).to(self.device)
@@ -146,6 +160,7 @@ class ONN_NFM(torch.nn.Module):
 
         for i in range(len(losses_per_layer)):
             losses_per_layer[i].backward(retain_graph=True)
+
             self.output_layers[i].weight.data -= self.n * \
                                                  self.alpha[i] * self.output_layers[i].weight.grad.data
             self.output_layers[i].bias.data -= self.n * \
@@ -166,23 +181,10 @@ class ONN_NFM(torch.nn.Module):
 
         self.alpha = Parameter(self.alpha / z_t, requires_grad=False).to(self.device)
 
-        if show_loss:
-            real_output = torch.sum(torch.mul(
-                self.alpha.view(self.max_num_hidden_layers, 1).repeat(1, self.batch_size).view(
-                    self.max_num_hidden_layers, self.batch_size, 1), predictions_per_layer), 0)
-            criterion = nn.CrossEntropyLoss().to(self.device)
-            loss = criterion(real_output.view(self.batch_size, self.n_classes), Y.view(self.batch_size).long())
-            self.loss_array.append(loss)
-            if (len(self.loss_array) % 1000) == 0:
-                print("WARNING: Set 'show_loss' to 'False' when not debugging. "
-                      "It will deteriorate the fitting performance.")
-                loss = torch.Tensor(self.loss_array).mean().cpu().numpy()
-                print("Alpha:" + str(self.alpha.data.cpu().numpy()))
-                print("Training Loss: " + str(loss))
-                self.loss_array.clear()
 
     def partial_fit_(self, Xi_data, Xv_data, Y_data, show_loss=False):
         self.update_weights(Xi_data, Xv_data, Y_data, show_loss)
+
 
     def partial_fit(self, Xi_data, Xv_data, Y_data, show_loss=False):
         self.partial_fit_(Xi_data, Xv_data, Y_data, show_loss)

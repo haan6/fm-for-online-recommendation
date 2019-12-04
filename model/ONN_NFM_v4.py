@@ -63,12 +63,13 @@ class ONN_NFM_V4(torch.nn.Module):
         self.s = Parameter(torch.tensor(s), requires_grad=False).to(self.device)
 
         # FM Part
-        self.first_order_embeddings = nn.ModuleList([nn.Embedding(feature_size, 1)
+        self.first_order_embeddings = nn.ModuleList([nn.Embedding(feature_size, 1, sparse=True)
                                                      for feature_size in self.feature_sizes]).to(self.device)
         if self.dropout_shallow:
             self.first_order_dropout = nn.Dropout(self.dropout_shallow[0]).to(self.device)
-        self.second_order_embeddings = nn.ModuleList([nn.Embedding(feature_size, self.embedding_size)
+        self.second_order_embeddings = nn.ModuleList([nn.Embedding(feature_size, self.embedding_size, sparse=True)
                                                       for feature_size in self.feature_sizes]).to(self.device)
+
         self.bias = Parameter(torch.randn(1)).to(self.device)
 
         # Neural Networks Part
