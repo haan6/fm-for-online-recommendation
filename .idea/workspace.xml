@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1b92fdf-e27a-4fea-9f27-537dbf02ca67" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/experiment.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/process.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/cod-rna2/cod-rna2.scale" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/cod-rna2/cod-rna2.scale" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/criteo/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/criteo/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/criteo/category_emb.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/criteo/category_emb.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/criteo/tiny_test_input.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/criteo/tiny_test_input.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/criteo/tiny_train_input.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/criteo/tiny_train_input.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_experiment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_experiment_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/deepfm_onn.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/deepfm_onn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/nfm_adam.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/nfm_adam.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/nfm_onn.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/nfm_onn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/data_preprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/data_preprocess.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/plot.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -341,7 +326,8 @@
       <workItem from="1576721225068" duration="1871000" />
       <workItem from="1576735701890" duration="5558000" />
       <workItem from="1578325403826" duration="4175000" />
-      <workItem from="1578359874659" duration="3824000" />
+      <workItem from="1578359874659" duration="4424000" />
+      <workItem from="1578381985504" duration="1663000" />
     </task>
     <task id="LOCAL-00001" summary="Add configurations">
       <created>1571712568440</created>
