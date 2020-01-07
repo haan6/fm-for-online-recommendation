@@ -5,6 +5,14 @@ This project compares the recent reseach of the online Factoriztiaon machine for
 This package has code for simulating and performing inference in a variety of factorization machines.
 
 
+## Naive Models
+Naive models take a batch of data as an input and train with the data. After traversing all the batches, naive models 
+* Factorization Machine
+* Deep Factorization Machine
+* Neural Factorization Machine
+* Attentional Factorization Machine
+
+
 ## Online Models
 Online models take single data as an input, make a prediction, and train with the data.
 * Online Factorization Machine
@@ -14,12 +22,6 @@ Online models take single data as an input, make a prediction, and train with th
 * Online Neural Factorization Machine with Hedge Backpropagation
 
 
-## Naive Models
-Naive models take a batch of data as an input and train with the data. After traversing all the batches, naive models 
-* Factorization Machine
-* Deep Factorization Machine
-* Neural Factorization Machine
-* Attentional Factorization Machine
 
 
 ## Reference
