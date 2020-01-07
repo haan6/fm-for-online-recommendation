@@ -1,6 +1,9 @@
 # SILAB-Online-Recommendation
 
-This package has code for simulating and performancing inference in a variety of factorization machines.
+This package has code for simulating and performing inference in a variety of factorization machines.
+
+## Author
+Yohan Jung, Yeji Han
 
 ## Online Models
 Online models take single data as an input, make a prediction, and train with the data.
