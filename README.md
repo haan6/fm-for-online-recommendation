@@ -33,6 +33,4 @@ Naive models take a batch of data as an input and train with the data. After tra
 
 [5] [Sketched Follow-The-Regularized-Leader for Online Factorization Machine](https://github.com/bmdy/SFTRL)
 
-[6] [Online Compact Convexified Factorization Machine -Wenpeng Zhang et al.]
-
-[7] [Large-scale Online Kernel Learning with Random Feature Reparameterization](https://github.com/tund/RRF )
+[6] [Large-scale Online Kernel Learning with Random Feature Reparameterization](https://github.com/tund/RRF )
