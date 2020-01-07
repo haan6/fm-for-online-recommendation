@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pickle
 
-def draw_graph(filepath, filename):
+def draw_roc_graph(filepath, filename):
     with open(filepath+filename, 'rb') as f:
         result_dict = pickle.load(f)
 
@@ -36,6 +36,10 @@ def draw_graph(filepath, filename):
     plt.savefig(f"performance/plot/{filename.split('.')[0]}_roc.png", dpi=100)
     plt.show()
 
+def draw_acc_graph(filepath, filename):
+    with open(filepath+filename, 'rb') as f:
+        result_dict = pickle.load(f)
+
     fig, ax = plt.subplots(figsize=(12, 9))
     acc_scores = result_dict['accuracy']
     ratio = result_dict['data_ratio']
@@ -62,4 +66,5 @@ def draw_graph(filepath, filename):
 
 if __name__ == "__main__":
     for file in os.listdir('performance/save_log/'):
-        draw_graph("performance/save_log/", file)
+        draw_roc_graph("performance/save_log/", file)
+        draw_acc_graph("performance/save_log/", file)

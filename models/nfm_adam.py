@@ -149,8 +149,6 @@ class NFMAdam(nn.Module):
                 roc.append({'tpr': tpr, 'fpr': fpr})
                 accuracy.append(((confusion_matrix['tp'] + confusion_matrix['tn']) / (i + 1) * 100))
 
-                print("ROC: ")
-
         time_elapsed = time() - start
         return time_elapsed, accuracy[-1], roc[-1], confusion_matrix
 

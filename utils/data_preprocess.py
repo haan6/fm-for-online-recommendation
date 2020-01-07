@@ -3,7 +3,7 @@
 """
 @author: Yeji Han
 
-This script is used to preprocess the raw data file
+This script is used to preprocess the raw dataset file
 """
 
 import random

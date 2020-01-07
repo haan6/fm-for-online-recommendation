@@ -125,10 +125,10 @@ class DeepFMOnn(nn.Module):
         with torch.no_grad():
             for i in range(len(losses_per_layer)):
                 losses_per_layer[i].backward(retain_graph=True)
-                # self.output_layers[i].weight.data -= self.n * \
-                #                                      self.alpha[i] * self.output_layers[i].weight.grad.data
-                # self.output_layers[i].bias.data -= self.n * \
-                #                                    self.alpha[i] * self.output_layers[i].bias.grad.data
+                # self.output_layers[i].weight.dataset -= self.n * \
+                #                                      self.alpha[i] * self.output_layers[i].weight.grad.dataset
+                # self.output_layers[i].bias.dataset -= self.n * \
+                #                                    self.alpha[i] * self.output_layers[i].bias.grad.dataset
 
                 for j in range(i + 1):
                     if w[j] is None:

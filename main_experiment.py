@@ -23,9 +23,9 @@ save_log = os.getcwd() + '/performance/save_log/'
 save_model = os.getcwd() + '/performance/save_model/'
 
 ########################################################################################################################
-# data setup
+# dataset setup
 ########################################################################################################################
-train_dict = data_preprocess.read_criteo_data('data/criteo/tiny_train_input.csv', 'data/criteo/category_emb.csv')
+train_dict = data_preprocess.read_criteo_data('dataset/criteo/tiny_train_input.csv', 'dataset/criteo/category_emb.csv')
 train_dict_size = train_dict['size']
 
 num_batchdata = 2500
@@ -35,15 +35,15 @@ data_config = "Iteration"
 
 if data_config == "Iteration":
     batch_train_Xi_list, batch_train_Xv_list, batch_train_Y_list, ratio_list \
-        = data_preprocess.create_ten_iter('data/criteo/tiny_train_input.csv', 'data/criteo/category_emb.csv', num_batch, num_batchdata)
+        = data_preprocess.create_ten_iter('dataset/criteo/tiny_train_input.csv', 'dataset/criteo/category_emb.csv', num_batch, num_batchdata)
 
 elif isinstance(data_config, int):
     batch_train_Xi_list, batch_train_Xv_list, batch_train_Y_list, ratio_list \
-        = data_preprocess.create_dataset('data/criteo/tiny_train_input.csv', 'data/criteo/category_emb.csv', int(num_batch/data_config), num_batch, num_batchdata)
+        = data_preprocess.create_dataset('dataset/criteo/tiny_train_input.csv', 'dataset/criteo/category_emb.csv', int(num_batch / data_config), num_batch, num_batchdata)
 
 else:
     batch_train_Xi_list, batch_train_Xv_list, batch_train_Y_list, ratio_list \
-        = data_preprocess.create_dataset('data/criteo/tiny_train_input.csv', 'data/criteo/category_emb.csv', int(num_batch/2), num_batch, num_batchdata)
+        = data_preprocess.create_dataset('dataset/criteo/tiny_train_input.csv', 'dataset/criteo/category_emb.csv', int(num_batch / 2), num_batch, num_batchdata)
 
 ########################################################################################################################
 # model setup
