@@ -1,9 +1,9 @@
 # SILAB-Online-Recommendation
 
+This project compares the recent reseach of the online Factoriztiaon machine for regression and classficatino task. We figure out the pros and cons for recent research. We will propose the revised model to overcome the limitation of online factorization machince.
+
 This package has code for simulating and performing inference in a variety of factorization machines.
 
-## Author
-Yohan Jung, Yeji Han
 
 ## Online Models
 Online models take single data as an input, make a prediction, and train with the data.
@@ -34,3 +34,10 @@ Naive models take a batch of data as an input and train with the data. After tra
 [5] [Sketched Follow-The-Regularized-Leader for Online Factorization Machine](https://github.com/bmdy/SFTRL)
 
 [6] [Large-scale Online Kernel Learning with Random Feature Reparameterization](https://github.com/tund/RRF )
+
+
+## Funding
+This research was supported by the Korean MSIT (Ministry of Science and ICT), under the National Program for Excellence in SW (2016-0-00018), supervised by the IITP (Institute for Information & communications Technology Planning&Evaluation)
+
+## Author
+Yohan Jung, Yeji Han
