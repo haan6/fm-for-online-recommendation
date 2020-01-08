@@ -52,8 +52,8 @@ class RRF_Online(Module):
             raise NotImplemented('wrong task assigned')
         # gamma
         if gamma == None:
-            self.gamma = Tensor_type(np.log(1.0) * np.ones((self.num_feature, 1)))  # log 형태로 save
-            #self.gamma = Tensor_type(np.log( np.random.rand(self.num_feature, 1)) )  # log 형태로 save
+            #self.gamma = Tensor_type(np.log(1.0) * np.ones((self.num_feature, 1)))  # log 형태로 save
+            self.gamma = Tensor_type(np.log( np.random.rand(self.num_feature, 1)) )  # log 형태로 save
 
         else :
             self.gamma = Tensor_type(np.log(gamma) * np.ones((self.num_feature, 1)))  # log 형태로 save
@@ -161,7 +161,8 @@ class RRF_Online(Module):
             #print(scalar)
             if torch.isnan(scalar):
                 #raise ValueError('Nan contained')
-                print('Nan contained')
+                #print('Nan contained')
+                pass
             else:
 
                 d_w, d_gamma = self._get_gradient_wrt_all(x_t, y_t)
