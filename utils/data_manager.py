@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 
 def load_dataset_movielens(filename, lines, columns, nbUsers):
     # Features are one-hot encoded in a sparse matrix
+
     X = lil_matrix((lines, columns)).astype('float32')
     X2 = lil_matrix((lines, columns + 1)).astype('float64')
     # Labels are stored in a vector
