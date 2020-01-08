@@ -12,15 +12,12 @@ from sklearn.metrics import roc_auc_score
 from models.models_meta_emb.meta_fm import FM_MetaEmbedding
 
 
-torch.manual_seed(1)
-torch.cuda.manual_seed_all(1)
-
-
 """
 Since FM has limitation in dealing with real dataset where the number of user 
 and items is extremely huge, >=10^8, we develop the meta embedding FM which targets the mentioned limitation.
 This code conducts the real company dataset which can not be revealed. 
 However, we reveal the code and experiment process to introduce how our code can be runned given the processed dataset.
+For more detail, refer to models_meta_emb/meta_fm.py
 """
 
 
@@ -116,10 +113,12 @@ user_dict_prob = result_dict['user_dict_prob']
 ###############################################################################################
 # experiment_option
 ###############################################################################################
+
+torch.manual_seed(1)
+torch.cuda.manual_seed_all(1)
+
 num_rep = 1
 num_exp_idx = 403  # experiment index
-
-
 task_type = 'extra'
 num_hidden_embedding = 50
 binary_repr = 8 + 1

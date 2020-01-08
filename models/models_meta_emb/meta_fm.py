@@ -11,6 +11,12 @@ from sklearn.metrics import roc_auc_score
 import torch.backends.cudnn
 
 
+"""
+We introduce the meta embedding which targets the scalibility issues for fm.
+Intuitively, for large size feature embedding that requires more than 10^8 embedding for the feature,
+we approximate the feature embedding by weighted sum of small size meta embedding
+and weight can be obtained by neural network. 
+"""
 
 
 class FM_MetaEmbedding(torch.nn.Module):
