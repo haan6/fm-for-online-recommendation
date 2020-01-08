@@ -2,19 +2,17 @@ from utils import data_preprocess
 import os
 import pickle
 import numpy as np
-import torch
-
 
 import sys
 from time import time
 
 sys.path.append('../')
 
-from models.deepfm_adam import DeepFMAdam
-from models.deepfm_onn import DeepFMOnn
-from models.nfm_adam import NFMAdam
-from models.nfm_onn import NFMOnn
-from models.fm_adam import FMAdam
+from models.models_online_deep.deepfm_adam import DeepFMAdam
+from models.models_online_deep.deepfm_onn import DeepFMOnn
+from models.models_online_deep.nfm_adam import NFMAdam
+from models.models_online_deep.nfm_onn import NFMOnn
+from models.models_online_deep.fm_adam import FMAdam
 
 ########################################################################################################################
 # save path
