@@ -35,21 +35,20 @@ For model detail, you can check it in models and jupyters directory.
 ## Dataset
 
 #### Real Valued Dataset <br/>
-[1] movielens 100k - https://grouplens.org/datasets/movielens/  <br/>
-[2] YearPredictionMSD - https://archive.ics.uci.edu/ml/datasets/yearpredictionmsd/ <br/>
+[1] [movielens 100k](https://grouplens.org/datasets/movielens/)  <br/>
+[2] [YearPredictionMSD](https://archive.ics.uci.edu/ml/datasets/yearpredictionmsd/) <br/>
 #### Discrete Valued Dataset  <br/>
-[3] cod-rna - https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/ <br/>
-[4] Frappe - https://github.com/hexiangnan/neural_factorization_machine/tree/master/data/frappe/ <br/>
+[3] [cod-rna](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/)   <br/>
+[4] [Frappe](https://github.com/hexiangnan/neural_factorization_machine/tree/master/data/frappe/) <br/>
+[5] [Criteo]   
     
-    
-## Reference Paper
+## Installation
 
+    git clone https://github.com/yejihan627/SILAB-Online-Recommendation.git
+    if necessary, install the required module as follows
+    pip3 install module-name
+    ex) pip3 install numpy 
 
-[1] Factorization Machines -S Rendle et al. <br/>
-[2] Online Compact Convexified Factorization Machine -Wenpeng Zhang et al. <br/>
-[3] Sketched Follow-The-Regularized-Leader for Online Factorization Machine -Luo Luo et al. <br/>
-[4] Ad Click Prediction: a View from the Trenches -H. Brendan McMahan et al. <br/>
-[5] Large-scale Online Kernel Learning with Random Feature Reparameterization -Tu Dinh Nguyen et al. <br/>
 
 
 
