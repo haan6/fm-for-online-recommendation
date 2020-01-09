@@ -7,12 +7,12 @@ conducts the recommendations tasks, (2) On-line setting assumes that as data poi
  model sequentially trains the data and recommends the items. 
  
 What we have done for this projects can be summarized as : <br/>
-(1) We study the previous models and construct them based on pytorch for  Off-line setting and On-line setting.  <br/>
+(1) We study the previous models and implement them based on pytorch for  Off-line setting and On-line setting.  <br/>
 (2) We try to propose Online Neural Factorization Machine. <br/>
 (3) We propose the Meta Embedding Factorization machine designed for the specific dataset which 
     requires the large scale feature embeddings for some of the features.
    
-For model detail, you can check in models and jupyters directory. 
+For model detail, you can check it in models and jupyters directory. 
 
 
 ## Models for Off-line setting
@@ -66,4 +66,5 @@ For model detail, you can check in models and jupyters directory.
 This research was supported by the Korean MSIT (Ministry of Science and ICT), under the National Program for Excellence in SW (2016-0-00018), supervised by the IITP (Institute for Information & communications Technology Planning&Evaluation)
 
 ## Author
-Yohan Jung, Yeji Han
+Yohan Jung (becre1776@kaist.ac.kr) <br/>
+Yeji Han (yejihan@kaist.ac.kr)
