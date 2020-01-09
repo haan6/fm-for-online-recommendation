@@ -40,8 +40,13 @@ For model detail, you can check it in models and jupyters directory.
 #### Discrete Valued Dataset  <br/>
 [3] [cod-rna](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/)   <br/>
 [4] [Frappe](https://github.com/hexiangnan/neural_factorization_machine/tree/master/data/frappe/) <br/>
+<<<<<<< HEAD
     
     
+=======
+[5] [Criteo](https://github.com/nzc/dnn_ctr/tree/master/data)
+    
+>>>>>>> ab706038a38e278344c0b15c330799c899658e3e
 ## Installation
 
     git clone https://github.com/yejihan627/SILAB-Online-Recommendation.git
