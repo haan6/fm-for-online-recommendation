@@ -1,4 +1,4 @@
-# SILAB FM & Online FM Projects for Recommendation Systems
+# KAIST SILAB FM & Online FM Projects for Recommendation Systems
 
 This project studies the Factorization Machine model and its variations for recommendation systems.
 Here, we consider the two problem settings for recommendation systems: 
@@ -7,13 +7,12 @@ conducts the recommendations tasks, (2) On-line setting assumes that as data poi
  model sequentially trains the data and recommends the items. 
  
 What we have done for this projects can be summarized as : <br/>
-(1) We consi
-
-
-
-
-the recent reseach of the online Factoriztiaon machine for regression and classficatino task. We figure out the pros and cons for recent research. We will propose the revised model to overcome the limitation of online factorization machince.
-This package has code for simulating and performing inference in a variety of factorization machines.
+(1) We study the previous models and construct them based on pytorch for  Off-line setting and On-line setting.  <br/>
+(2) We try to propose Online Neural Factorization Machine. <br/>
+(3) We propose the Meta Embedding Factorization machine designed for the specific dataset which 
+    requires the large scale feature embeddings for some of the features.
+   
+For model detail, you can check in models and jupyters directory. 
 
 
 ## Models for Off-line setting
