@@ -1,17 +1,19 @@
 import torch
 import time
+import os
 import numpy as np
 import matplotlib
-
 matplotlib.use('Agg') # Must be before importing matplotlib.pyplot or pylab!
 import matplotlib.pyplot as plt
 
 from torch.nn import Module
 from models.models_online.FM_Base import FM_Base
 from utils.data_manager  import *
-
 Tensor_type = torch.DoubleTensor
 
+
+import sys
+sys.path.append('./models/models_online/')
 
 class SFTRL_CCFM(FM_Base):
 
@@ -130,7 +132,9 @@ if __name__ == "__main__" :
     nbRatingsTest = 9430
 
     data_dir = './../../dataset/ml-100k/'
-    print(data_dir)
+    # print(data_dir)
+
+    print(os.getcwd())
 
     #filename1, filename2 = 'ub.base', 'ub.test'
     filename1, filename2 = 'ua.base', 'ua.test'
