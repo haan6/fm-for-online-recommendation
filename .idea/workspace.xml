@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a1b92fdf-e27a-4fea-9f27-537dbf02ca67" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jupyters/experiment.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/jupyters/experiment.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jupyters/online_models_deep_example.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/jupyters/online_models_deep_example.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -329,6 +331,7 @@
       <workItem from="1578359874659" duration="4424000" />
       <workItem from="1578381985504" duration="2961000" />
       <workItem from="1578389582824" duration="209000" />
+      <workItem from="1578550485632" duration="808000" />
     </task>
     <task id="LOCAL-00001" summary="Add configurations">
       <created>1571712568440</created>
