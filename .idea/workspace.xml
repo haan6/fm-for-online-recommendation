@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1b92fdf-e27a-4fea-9f27-537dbf02ca67" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/main_experiment_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_experiment_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/models_meta_emb/meta_fm.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/models_meta_emb/meta_fm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,18 +58,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/models_online_deep/deepfm_adam.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="53" column="26" lean-forward="true" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
-              <folding>
-                <element signature="e#25#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/models_online_deep/deepfm_onn.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-3622">
@@ -91,7 +78,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/models_meta_emb/meta_fm.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="160">
@@ -99,6 +86,18 @@
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="180">
+                <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -186,6 +185,7 @@
         <option value="$PROJECT_DIR$/models/models_online_deep/afm_adam.py" />
         <option value="$PROJECT_DIR$/main_experiment_3.py" />
         <option value="$PROJECT_DIR$/models/models_meta_emb/meta_fm.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -532,7 +532,7 @@
       <workItem from="1578389582824" duration="209000" />
       <workItem from="1578486809407" duration="3816000" />
       <workItem from="1578490855839" duration="931000" />
-      <workItem from="1578496611905" duration="6969000" />
+      <workItem from="1578496611905" duration="11642000" />
     </task>
     <task id="LOCAL-00001" summary="Add configurations">
       <created>1571712568440</created>
@@ -650,7 +650,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13952000" />
+    <option name="totallyTimeSpent" value="18625000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -665,7 +665,7 @@
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17270789" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1433902" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1012,6 +1012,16 @@
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="180">
+            <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

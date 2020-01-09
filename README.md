@@ -1,41 +1,66 @@
-# SILAB-Online-Recommendation
+# SILAB FM & Online FM Projects for Recommendation Systems
 
-This project compares the recent reseach of the online Factoriztiaon machine for regression and classficatino task. We figure out the pros and cons for recent research. We will propose the revised model to overcome the limitation of online factorization machince.
+This project studies the Factorization Machine model and its variations for recommendation systems.
+Here, we consider the two problem settings for recommendation systems: 
+(1) Off-line setting assumes that given sufficient amount of data, the model trains the given dataset and then 
+conducts the recommendations tasks, (2) On-line setting assumes that as data points are given sequentially, the 
+ model sequentially trains the data and recommends the items. 
+ 
+What we have done for this projects can be summarized as : <br/>
+(1) We consi
 
+
+
+
+the recent reseach of the online Factoriztiaon machine for regression and classficatino task. We figure out the pros and cons for recent research. We will propose the revised model to overcome the limitation of online factorization machince.
 This package has code for simulating and performing inference in a variety of factorization machines.
 
 
-## Naive Models
-Naive models take a batch of data as an input and train with the data. After traversing all the batches, naive models 
+## Models for Off-line setting
 * Factorization Machine
+* Meta Embedding Factorization Machine (proposed)
 * Deep Factorization Machine
 * Neural Factorization Machine
 * Attentional Factorization Machine
 
 
-## Online Models
-Online models take single data as an input, make a prediction, and train with the data.
-* Online Factorization Machine
-* Online Deep Factorization Machine
-* Online Neural Factorization Machine
-* Online Deep Factorization Machine with Hedge Backpropagation
-* Online Neural Factorization Machine with Hedge Backpropagation
+## Models for On-line setting 
+* Online Factorization Machine by FTRL, Sketched FTRL
+* Online Deep Factorization Machine by SGD 
+* Online Neural Factorization Machine by SGD
+* Online Deep Factorization Machine by Hedge Backpropagation (proposed)
+* Online Neural Factorization Machine by Hedge Backpropagation (proposed)
 
 
 
+## Dataset
 
-## Reference
-[1] [PyTorch Implementations of Factorization Machines](https://github.com/nzc/dnn_ctr)
+#### Real Valued Dataset <br/>
+[1] movielens 100k - https://grouplens.org/datasets/movielens/  <br/>
+[2] YearPredictionMSD - https://archive.ics.uci.edu/ml/datasets/yearpredictionmsd/ <br/>
+#### Discrete Valued Dataset  <br/>
+[3] cod-rna - https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/ <br/>
+[4] Frappe - https://github.com/hexiangnan/neural_factorization_machine/tree/master/data/frappe/ <br/>
+    
+    
+## Reference Paper
 
-[2] [Factorization Machine Review Paper](https://github.com/rixwew/pytorch-fm)
 
-[3] [A PyTorch Implementation of DeepFM for CTR Prediction Problem](https://github.com/chenxijun1029/DeepFM_with_PyTorch)
+[1] Factorization Machines -S Rendle et al. <br/>
+[2] Online Compact Convexified Factorization Machine -Wenpeng Zhang et al. <br/>
+[3] Sketched Follow-The-Regularized-Leader for Online Factorization Machine -Luo Luo et al. <br/>
+[4] Ad Click Prediction: a View from the Trenches -H. Brendan McMahan et al. <br/>
+[5] Large-scale Online Kernel Learning with Random Feature Reparameterization -Tu Dinh Nguyen et al. <br/>
 
-[4] [Online Deep Learning: Learning Deep Neural Networks on the Fly](https://github.com/phquang/OnlineDeepLearning/tree/master/src)
 
-[5] [Sketched Follow-The-Regularized-Leader for Online Factorization Machine](https://github.com/bmdy/SFTRL)
 
-[6] [Large-scale Online Kernel Learning with Random Feature Reparameterization](https://github.com/tund/RRF )
+## Reference Code
+[1] [PyTorch Implementations of Factorization Machines](https://github.com/nzc/dnn_ctr) <br/>
+[2] [Factorization Machine Review Paper](https://github.com/rixwew/pytorch-fm) <br/>
+[3] [A PyTorch Implementation of DeepFM for CTR Prediction Problem](https://github.com/chenxijun1029/DeepFM_with_PyTorch) <br/>
+[4] [Online Deep Learning: Learning Deep Neural Networks on the Fly](https://github.com/phquang/OnlineDeepLearning/tree/master/src) <br/>
+[5] [Sketched Follow-The-Regularized-Leader for Online Factorization Machine](https://github.com/bmdy/SFTRL) <br/>
+[6] [Large-scale Online Kernel Learning with Random Feature Reparameterization](https://github.com/tund/RRF ) 
 
 
 ## Funding
