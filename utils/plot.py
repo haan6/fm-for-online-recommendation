@@ -8,7 +8,7 @@ def draw_roc_graph(filepath, filename):
         result_dict = pickle.load(f)
 
     xy_line = (0, 1)
-    fig, ax = plt.subplots(figsize=(12, 9))
+    fig, ax = plt.subplots(figsize=(8, 6))
 
     roc_scores = result_dict['roc']
     ratio = result_dict['data_ratio']
@@ -36,11 +36,12 @@ def draw_roc_graph(filepath, filename):
     plt.savefig(f"performance/plot/{filename.split('.')[0]}_roc.png", dpi=100)
     plt.show()
 
+
 def draw_acc_graph(filepath, filename):
     with open(filepath+filename, 'rb') as f:
         result_dict = pickle.load(f)
 
-    fig, ax = plt.subplots(figsize=(12, 9))
+    fig, ax = plt.subplots(figsize=(8, 6))
     acc_scores = result_dict['accuracy']
     ratio = result_dict['data_ratio']
 
