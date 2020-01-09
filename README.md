@@ -40,7 +40,7 @@ For model detail, you can check it in models and jupyters directory.
 #### Discrete Valued Dataset  <br/>
 [3] [cod-rna](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/)   <br/>
 [4] [Frappe](https://github.com/hexiangnan/neural_factorization_machine/tree/master/data/frappe/) <br/>
-[5] [Criteo]   
+[5] [Criteo](https://github.com/nzc/dnn_ctr/tree/master/data)
     
 ## Installation
 
