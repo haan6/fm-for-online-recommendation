@@ -1,4 +1,4 @@
-# KAIST SILAB FM & Online FM Projects for Recommendation Systems
+# KAIST CCC-Project FM & Online FM for Recommendation Systems
 
 This project studies the Factorization Machine model and its variations for recommendation systems.
 Here, we consider the two problem settings for recommendation systems: 
