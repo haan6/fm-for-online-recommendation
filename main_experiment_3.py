@@ -75,23 +75,21 @@ with open(save_path + save_filename + '.pickle', 'rb') as f:
     print(test_Xi.shape, test_Y.shape)
 
     ####################################
-    train_semi_idx = np.random.choice(int(len(train_Y)), replace=False, size=int(len(train_Y) * .7))
-    test_semi_idx = np.random.choice(int(len(test_Y)), replace=False, size=int(len(test_Y) * .7))
-    train_semi_idx = np.random.choice(int(len(train_Y)), replace=False, size=int(len(train_Y) * 1.0))
-    test_semi_idx = np.random.choice(int(len(test_Y)), replace=False, size=int(len(test_Y) * 1.0))
+    train_shuffled_idx = np.random.choice(int(len(train_Y)), replace=False, size=int(len(train_Y) * 1.0))
+    test_shuffled_idx = np.random.choice(int(len(test_Y)), replace=False, size=int(len(test_Y) *  1.0))
 
-    train_Xi = train_Xi[train_semi_idx]
-    train_Xv = train_Xv[train_semi_idx]
-    train_Y = train_Y[train_semi_idx]
+    train_Xi = train_Xi[train_shuffled_idx]
+    train_Xv = train_Xv[train_shuffled_idx]
+    train_Y = train_Y[train_shuffled_idx]
 
-    test_Xi = test_Xi[test_semi_idx]
-    test_Xv = test_Xv[test_semi_idx]
-    test_Y = test_Y[test_semi_idx]
+    test_Xi = test_Xi[test_shuffled_idx]
+    test_Xv = test_Xv[test_shuffled_idx]
+    test_Y = test_Y[test_shuffled_idx]
 
     ####################################
 
     print('#' * 30)
-    print('semi data loaded')
+    print('shuffled data loaded')
     print('train_Xi.shape,train_Y.shape')
     print(train_Xi.shape, train_Y.shape)
     print('test_Xi.shape,test_Y.shape')
