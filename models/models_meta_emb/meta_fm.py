@@ -12,20 +12,28 @@ import torch.backends.cudnn
 
 
 """
-We introduce the meta embedding which targets the scalibility issues for fm.
+We introduce the meta embedding to FM in order to target the scalibility issues for embeddings.
 Intuitively, for large size feature embedding that requires more than 10^8 embedding for the feature,
-we approximate the feature embedding by weighted sum of small size meta embedding
-and weight can be obtained by neural network. 
+We approximate the feature embedding by weighted sum of small size meta embedding where weights can be obtained by neural network. 
+Additionally, we consider the pair-wise ranking loss to be used as regulaizer, but it does not brings the expected merits.
+if control rate == 1 --> FM Loss
+   control rate == 0 --> Pair wise ranking loss
 """
 
 
+
+# feature : [post_type_idx, binary_user_idx , binary_post_idx]
+# since #user_idx >= 10^8 and #post_idx >= 10^8
+# we introduce the meta embeddings of user_idx such that #meta_user_idx = 500
+#              the meta embeddings of post_idx such that #meta_post_idx = 250
 class FM_MetaEmbedding(torch.nn.Module):
     def __init__(self,
                  direct_feature_sizes,
                  direct_embedding_sizes,
                  NNet_input_dim,
-                 is_shallow_dropout=True,
-                 dropout_shallow=[0.5],
+                 meta_emb_u_size,
+                 meta_emb_p_size,
+                 share_dim_size,
                  weight_decay=0.0,
                  b=0.0,
                  n=0.001):
@@ -35,32 +43,26 @@ class FM_MetaEmbedding(torch.nn.Module):
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.field_size = 3
         self.NNet_input_dim = NNet_input_dim
-        self.control_rate = 0.75
-
-        self.tau = 3
-        self.tau_test = 1
         self.direct_feature_sizes = direct_feature_sizes + 1
         self.direct_embedding_sizes = direct_embedding_sizes
 
-        self.is_shallow_dropout = is_shallow_dropout
-        self.dropout_shallow = dropout_shallow
+
+        self.control_rate = 1.0
+        self.tau = 3
+        self.tau_test = 1
         self.n = n
         self.weight_decay = weight_decay
         self.random_seed = 1
 
+
         self.b = Parameter(torch.tensor(b), requires_grad=True).to(self.device)
-
-        if self.dropout_shallow:
-            self.first_order_dropout = nn.Dropout(self.dropout_shallow[0]).to(self.device)
-
         self.embeddings_post_type = Variable(torch.randn(self.direct_feature_sizes, self.direct_embedding_sizes),
                                              requires_grad=True).to(self.device)
 
+        self.meta_emb_dim_u = 500 if meta_emb_u_size == None else meta_emb_u_size
+        self.meta_emb_dim_p = 250 if meta_emb_p_size == None else meta_emb_p_size
+        self.share_dim = 500 if share_dim_size == None else share_dim_size
 
-        # shallow embedding
-        self.meta_emb_dim_u = 500
-        self.meta_emb_dim_p = 250
-        self.share_dim = 500
 
         self.meta_embeddings_user = Variable(torch.randn(self.meta_emb_dim_u, self.direct_embedding_sizes),
                                              requires_grad=True).to(self.device)
@@ -213,6 +215,3 @@ class FM_MetaEmbedding(torch.nn.Module):
                 self.tau = temporary
                 return 1.0 if pred.data.numpy() >= 0.5 else 0.0, pred.data.numpy()
 
-
-if __name__ == "__main__":
-    print('hi')

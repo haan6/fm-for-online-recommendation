@@ -1,18 +1,18 @@
 # KAIST CCC-Project FM & Online FM for Recommendation Systems
 
-This project studies the Factorization Machine model and its variations for recommendation systems.
+In this project, we study the Factorization Machine model and its variations for recommendation systems.
 Here, we consider the two problem settings for recommendation systems: 
-(1) Off-line setting assumes that given sufficient amount of data, the model trains the given dataset and then 
-conducts the recommendations tasks, (2) On-line setting assumes that as data points are given sequentially, the 
+(1) Off-line setting that assumes that given sufficient amount of data, the model trains the given dataset and then 
+conducts the recommendations tasks, (2) On-line setting that assumes that as data points are given sequentially, the 
  model sequentially trains the data and recommends the items. 
  
-What we have done for this projects can be summarized as : <br/>
+What we have done for this project can be summarized as : <br/>
 (1) We study the previous models and implement them based on pytorch for  Off-line setting and On-line setting.  <br/>
 (2) We try to propose Online Neural Factorization Machine. <br/>
 (3) We propose the Meta Embedding Factorization machine designed for the specific dataset which 
-    requires the large scale feature embeddings for some of the features.
+    requires the large number of feature embeddings for some of the features.
    
-For model detail, you can check it in models and jupyters directory. 
+For more details, you can check it in models and jupyters directory. 
 
 
 ## Models for Off-line setting
@@ -40,8 +40,9 @@ For model detail, you can check it in models and jupyters directory.
 #### Discrete Valued Dataset  <br/>
 [3] [cod-rna](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/)   <br/>
 [4] [Frappe](https://github.com/hexiangnan/neural_factorization_machine/tree/master/data/frappe/) <br/>
-[5] [Criteo](https://github.com/nzc/dnn_ctr/tree/master/data)
+[5] [Criteo](https://github.com/nzc/dnn_ctr/tree/master/data) <br/>
     
+
 ## Installation
 
     git clone https://github.com/yejihan627/SILAB-Online-Recommendation.git

@@ -13,9 +13,11 @@ from models.models_meta_emb.meta_fm import FM_MetaEmbedding
 
 
 """
-Since FM has limitation in dealing with real dataset where the number of user 
-and items is extremely huge, >=10^8, we develop the meta embedding FM which targets the mentioned limitation.
-This code conducts the real company dataset which can not be revealed. 
+Since FM has limitation in dealing with real dataset 
+where the number of user and items is extremely huge, >=10^8, 
+we develop the meta embedding FM which targets the mentioned limitation.
+
+This code conducts the real company dataset which can not be revealed in public. 
 However, we reveal the code and experiment process to introduce how our code can be runned given the processed dataset.
 For more detail, refer to models_meta_emb/meta_fm.py
 """
@@ -24,17 +26,18 @@ For more detail, refer to models_meta_emb/meta_fm.py
 ###############################################################################################
 # get_binary_representaion
 ###############################################################################################
+
+# this lengths are set by specific dataset
+len_binary_repr = 8 + 1
+len_binary_repr2 = 40 + 1
 def _get_binary_repr(train_Xi):
     output_list = []
     for i_Xi in train_Xi:
         temp_Xi = []
 
-        a = list(np.binary_repr(i_Xi[0], width=binary_repr))
-        a += list(np.binary_repr(i_Xi[1], width=binary_repr2))
-        a += list(np.binary_repr(i_Xi[2], width=binary_repr2))
-
-        #         a = list(np.binary_repr(i_Xi[1],width = binary_repr2))
-        #         a += list(np.binary_repr(i_Xi[2],width = binary_repr2))
+        a = list(np.binary_repr(i_Xi[0], width=len_binary_repr))
+        a += list(np.binary_repr(i_Xi[1], width=len_binary_repr2))
+        a += list(np.binary_repr(i_Xi[2], width=len_binary_repr2))
 
         output_list.append([int(i_a) for i_a in a])
 
@@ -102,7 +105,6 @@ with open(save_path + save_filename + '.pickle', 'rb') as f:
 
 print('loaded_saved_pickle_file')
 print(saved_pickle_file)
-
 with open(userhash_path + saved_pickle_file + '.pickle', 'rb') as f:
     result_dict = pickle.load(f)
 user_dict_prob = result_dict['user_dict_prob']
@@ -117,13 +119,24 @@ torch.cuda.manual_seed_all(1)
 
 num_rep = 1
 num_exp_idx = 403  # experiment index
-task_type = 'extra'
+task_type = 'extrapolation'
 num_hidden_embedding = 50
-binary_repr = 8 + 1
-binary_repr2 = 40 + 1
+
+
+
+# feature : [post_type_idx, binary_user_idx , binary_post_idx]
+# since #user_idx >= 10^8 and #post_idx >= 10^8
+# we introduce the meta embeddings of user_idx such that #meta_user_idx = 500
+#              the meta embeddings of post_idx such that #meta_post_idx = 250
+
 fm_meta_embedding = FM_MetaEmbedding(len_post_type,
                                      num_hidden_embedding,
-                                     [binary_repr, binary_repr2, binary_repr2])
+                                     [len_binary_repr, len_binary_repr2, len_binary_repr2],
+                                     meta_emb_u_size = None,
+                                     meta_emb_p_size= None,
+                                     share_dim_size = None)
+
+
 
 fm_meta_embedding.control_rate =  .5 # for loss regulaizer
 
