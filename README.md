@@ -44,7 +44,7 @@ For more details, you can check it in models and jupyters directory.
     
 
 ## Installation
-
+   
     git clone https://github.com/yejihan627/SILAB-Online-Recommendation.git
     if necessary, install the required module as follows
     pip3 install module-name
