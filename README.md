@@ -1,21 +1,21 @@
 # KAIST CCC-Project FM & Online FM for Recommendation Systems
 
-In this project, we study the Factorization Machine model and its variations for recommendation systems.
+In this project, we study factorization machine and its variations for recommendation systems.
 Here, we consider the two problem settings for recommendation systems: 
-(1) Off-line setting that assumes that given sufficient amount of data, the model trains the given dataset and then 
-conducts the recommendations tasks, (2) On-line setting that assumes that as data points are given sequentially, the 
+(1) Offline setting that assumes that given sufficient amount of data, the model trains the given dataset and then 
+conducts the recommendations tasks, (2) Online setting that assumes that as data points are given sequentially, the 
  model sequentially trains the data and recommends the items. 
  
 What we have done for this project can be summarized as : <br/>
-(1) We study the previous models and implement them based on pytorch for  Off-line setting and On-line setting.  <br/>
+(1) We study the previous models and implement them based on pytorch for offline setting and online setting.  <br/>
 (2) We try to propose Online Neural Factorization Machine. <br/>
-(3) We propose the Meta Embedding Factorization machine designed for the specific dataset which 
+(3) We propose Meta Embedding Factorization machine designed for the specific dataset which 
     requires the large number of feature embeddings for some of the features.
    
 For more details, you can check it in models and jupyters directory. 
 
 
-## Models for Off-line setting
+## Models for Offline Setting
 * Factorization Machine
 * Meta Embedding Factorization Machine (proposed)
 * Deep Factorization Machine
@@ -23,13 +23,12 @@ For more details, you can check it in models and jupyters directory.
 * Attentional Factorization Machine
 
 
-## Models for On-line setting 
+## Models for Online Setting 
 * Online Factorization Machine by FTRL, Sketched FTRL
 * Online Deep Factorization Machine by SGD 
 * Online Neural Factorization Machine by SGD
 * Online Deep Factorization Machine by Hedge Backpropagation (proposed)
 * Online Neural Factorization Machine by Hedge Backpropagation (proposed)
-
 
 
 ## Dataset
@@ -43,16 +42,6 @@ For more details, you can check it in models and jupyters directory.
 [5] [Criteo](https://github.com/nzc/dnn_ctr/tree/master/data) <br/>
     
 
-## Installation
-   
-    git clone https://github.com/yejihan627/SILAB-Online-Recommendation.git
-    if necessary, install the required module as follows
-    pip3 install module-name
-    ex) pip3 install numpy 
-
-
-
-
 ## Reference Code
 [1] [PyTorch Implementations of Factorization Machines](https://github.com/nzc/dnn_ctr) <br/>
 [2] [Factorization Machine Review Paper](https://github.com/rixwew/pytorch-fm) <br/>
@@ -63,7 +52,8 @@ For more details, you can check it in models and jupyters directory.
 
 
 ## Funding
-This research was supported by the Korean MSIT (Ministry of Science and ICT), under the National Program for Excellence in SW (2016-0-00018), supervised by the IITP (Institute for Information & communications Technology Planning&Evaluation)
+This research was supported by the Korean MSIT (Ministry of Science and ICT), under the National Program for Excellence in SW (2016-0-00018), supervised by the IITP (Institute for Information communication Technology Planning and Evaluation)
+
 
 ## Author
 Yohan Jung (becre1776@kaist.ac.kr) <br/>
